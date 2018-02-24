@@ -1,0 +1,30 @@
+{{if isset .Params "youtube" }}
+  <div id="youtubeembed">
+    <section class="attachments green">
+	<label>
+		<i class="fa fa-paperclip" aria-hidden="true"></i>
+		Video
+	</label>
+	<div class="attachments-video">
+  	  <div class="video-responsive">
+	    <iframe id="widget2" src="http://www.youtube.com/embed/{{.Params.youtube}}?&amp;showinfo=0&amp;modestbranding=1&amp;autohide=1&amp;enablejsapi=1&amp;origin=https:%2F%2Fpapers.freebsd.org" allowfullscreen="" frameborder="0" height="360" width="640"></iframe>
+	  </div>
+	</div>
+    </section>
+  </div>
+{{end}}
+{{if isset .Params "video" }}
+  <div id="videoembed">
+    <section class="attachments green">
+	<label>
+		<i class="fa fa-paperclip" aria-hidden="true"></i>
+		Video
+	</label>
+	<div class="attachments-files">
+		<li>
+			<a href="{{.Params.video}}" >Watch Video</a>
+		</li>
+	<div>
+    </section>
+  </div>
+{{end}}

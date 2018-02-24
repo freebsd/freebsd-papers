@@ -13,7 +13,7 @@
     <ul>
     {{ range .Data.Pages }}
         <li>
-            <a href="{{.RelPermalink}}">{{.Params.Author}} &mdash; {{.Title}}</a>
+            <a href="{{.RelPermalink}}">{{.Title}} &mdash; {{.Params.Author}}</a>
         </li>
     {{ end }}
     </ul>

@@ -17,7 +17,7 @@
 	<!-- Ranges through content/post/*.md -->
         {{ range first 25 .Data.Pages }}
           <li>
-            <a href="{{.Permalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>
+		<a href="{{.RelPermalink}}">{{.Title}} &mdash; {{.Params.Author}}</a>
           </li>
 	{{ end }}
 	</ul>
