@@ -1,0 +1,24 @@
+{{if eq .Page.File.BaseFileName "index"}}
+	{{$.Scratch.Add "filesName" "files"}}
+{{else}}
+	{{$.Scratch.Add "filesName" (printf "%s.files" .Page.File.BaseFileName)}}
+{{end}}
+{{ if (fileExists (printf "./content/%s%s" .Page.File.Dir ($.Scratch.Get "filesName")) ) }}
+<section class="attachments blue">
+	<label>
+		<i class="fa fa-paperclip" aria-hidden="true"></i>
+		{{T "Attachments-label"}}
+	</label>
+	<div class="attachments-files">
+	{{ range (readDir (printf "./content/%s%s" .Page.File.Dir ($.Scratch.Get "filesName")) ) }}
+		{{ $fileDir := replace $.Page.File.Dir "\\" "/" }}
+		<li>
+			<a href="{{ (printf "%s%s/%s" $fileDir ($.Scratch.Get "filesName") .Name) | relURL }}" >
+				{{.Name}}
+			</a>
+			({{div .Size 1024 }} ko)
+		</li>
+	{{end}}
+	<div>
+</section>
+{{end}}

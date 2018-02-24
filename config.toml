@@ -1,9 +1,12 @@
 baseURL = "https://papers.freebsd.org/"
 languageCode = "en-us"
 title = "FreeBSD Presentations and Papers"
-permalinks:
-  post: /:year/:title/
-params:
-  Subtitle: "The collected works of the FreeBSD community as presented at various conferences and summits."
-staticDir: [ "static", "_assets" ]
 publishDir = "public_html"
+pluralizeListTitles = false
+
+[permalinks]
+  post = "/:year/:title/"
+
+[params]
+  subtitle = "The collected works of the FreeBSD community as presented at various conferences and summits."
+  themeVariant = "red"
