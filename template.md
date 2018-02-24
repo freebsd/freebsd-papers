@@ -1,9 +1,9 @@
 ---
 layout: paper
-title: 
+title: "Title"
+date: 
 author: 
 email: 
-slides: /_assets/
-paper: /_assets/
+video: optional-link
 ---
 <description goes here>
