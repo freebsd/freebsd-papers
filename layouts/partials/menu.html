@@ -15,7 +15,7 @@
     <ul class="topics">
 
         {{range .Site.Home.Sections.ByTitle.Reverse}}
-          {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks}}
+          {{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks}}
         {{end}}
     </ul>
 
@@ -85,10 +85,9 @@
 </nav>
 
 <!-- templates -->
-{{ define "section-tree-nav" }}
+{{ define "papers-tree-nav" }}
 {{ $showvisitedlinks := .showvisitedlinks }}
 {{ $currentNode := .currentnode }}
-Allan:{{ .sect }}
  {{with .sect}}
   {{if .IsSection}}
     {{safeHTML .Params.head}}
@@ -98,42 +97,54 @@ Allan:{{ .sect }}
         {{if .Params.alwaysopen}}parent{{end}}
         ">
       <a href="{{.RelPermalink}}">
+	  <i class="fa {{if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) }}fa-angle-double-down{{else}}fa-angle-double-right{{end}}"></i>
           {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}}
           {{ if $showvisitedlinks}}
             <i class="fa fa-check read-icon"></i>
           {{ end }}
       </a>
-      {{ $numberOfPages := (add (len .Pages) (len .Sections)) }}
-      {{ if ne $numberOfPages 0 }}
+      {{ if ne (add (len .Pages) (len .Sections)) 0 }}
         <ul>
-          {{ $currentNode.Scratch.Set "pages" .Pages }}
-          {{ if .Sections}}
-            {{ $currentNode.Scratch.Set "pages" (.Pages | union .Sections) }}
-          {{end}}
-          {{ $pages := ($currentNode.Scratch.Get "pages") }}
-          
-        {{if eq .Site.Params.ordersectionsby "title"}}  
-          {{ range $pages.ByTitle }}
-            {{ if and .Params.hidden (not $.showhidden) }} 
-            {{else}}
-            {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
-            {{end}}
-          {{ end }}
-        {{else}}
-          {{ range $pages.ByWeight }}
-            {{ if and .Params.hidden (not $.showhidden) }} 
-            {{else}}
-            {{ template "section-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
-            {{end}}
-          {{ end }}
-        {{end}}
+	  {{ range .Sections }}
+	    <li data-nav-id="{{.URL}}" title="{{.Title}}" class="dd-item 
+		{{if .IsAncestor $currentNode }}parent{{end}}
+		{{if eq .UniqueID $currentNode.UniqueID}}active{{end}}
+		{{if .Params.alwaysopen}}parent{{end}}
+	      ">
+	    <a href="{{.RelPermalink}}">
+	      <i class="fa {{if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) }}fa-angle-double-down{{else}}fa-angle-double-right{{end}}"></i>
+		{{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}}
+		{{ if $showvisitedlinks}}
+		<i class="fa fa-check read-icon"></i>
+		{{ end }}
+	    </a>
+	    {{if or (eq .UniqueID $currentNode.UniqueID) (.IsAncestor $currentNode) }}
+	    {{if ne (len .Pages) 0 }}
+	      <ul>
+	      {{ range .Pages }}
+		{{ if and .Params.hidden (not $.showhidden) }} 
+		{{else}}
+		{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
+		{{end}}
+	      {{ end }}
+	      </ul>
+	    {{end}}
+	    {{end}}
+	  {{ end }}
+	  {{ range .Pages }}
+	    {{ if and .Params.hidden (not $.showhidden) }} 
+	    {{else}}
+	    {{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
+	    {{end}}
+	  {{ end }}
         </ul>
-      {{ end }}        
+      {{ end }}
     </li>
   {{else}}
     {{ if not .Params.Hidden }}
       <li data-nav-id="{{.URL}}" title="{{.Title}}" class="dd-item {{if eq .UniqueID $currentNode.UniqueID}}active{{end}}">
         <a href="{{ .RelPermalink}}">
+        <i class="fa fa-angle-right" papers-menu-item></i>
         {{safeHTML .Params.Pre}}{{or .Params.menuTitle .LinkTitle .Title}}{{safeHTML .Params.Post}}
         {{ if $showvisitedlinks}}<i class="fa fa-check read-icon"></i>{{end}}
         </a>
@@ -142,4 +153,3 @@ Allan:{{ .sect }}
   {{end}}
  {{ end }}
 {{ end }}
-
