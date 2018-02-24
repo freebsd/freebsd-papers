@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: Universal Configuration Files
+date: 2015-07-01
 author: Allan Jude
 email: allanjude@freebsd.org
 slides: /_assets/326_UCL_for_FreeBSD.pdf

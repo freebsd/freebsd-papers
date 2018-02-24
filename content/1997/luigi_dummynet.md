@@ -1,6 +1,7 @@
 ---
 layout: paper
-title: Dummynet: A simple approach to the evaluation of network protocols
+title: "Dummynet: A simple approach to the evaluation of network protocols"
+date: 1997-01-01
 author: Luigi Rizzo
 email: l.rizzo@iet.unipi.it
 paper: /_assets/other1997_luigi_dummynet.pdf

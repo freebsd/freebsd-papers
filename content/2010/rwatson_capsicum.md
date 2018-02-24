@@ -1,6 +1,7 @@
 ---
 layout: paper
-title: Capsicum: practical capabilities for UNIX
+title: "Capsicum: practical capabilities for UNIX"
+date: 2010-01-01
 author: Robet Watson
 email: rwatson@freebsd.org
 paper: /_assets/other2010_rwatson_capsicum.pdf

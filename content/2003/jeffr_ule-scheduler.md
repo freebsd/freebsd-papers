@@ -1,6 +1,7 @@
 ---
 layout: paper
-title: ULE: A Modern Scheduler For FreeBSD
+title: "ULE: A Modern Scheduler For FreeBSD"
+date: 2003-01-01
 author: Jeff Roberson
 email: jeff@freebsd.org
 paper: /_assets/usenix2003_jeff_ule-scheduler.pdf

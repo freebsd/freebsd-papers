@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: GELIBoot
+date: 2016-03-10
 author: Allan Jude
 email: allanjude@freebsd.org
 slides: /_assets/AsiaBSDCon_-_GELIBoot_slides.pdf

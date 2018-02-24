@@ -1,6 +1,7 @@
 ---
 layout: paper
-title: Looking Backards -- The coming decades of BSD
+title: "Looking Backwards -- The coming decades of BSD"
+date: 2016-09-24
 author: George Neville-Neil
 email: gnn@freebsd.org
 slides: /_assets/LookingBackwards.pdf

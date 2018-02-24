@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: Malloc(3) revisited
+date: 1998-01-01
 author: Poul-Henning Kamp
 email: phk@freebsd.org 
 paper: /_assets/usenix1998_kamp_malloc.pdf

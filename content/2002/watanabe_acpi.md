@@ -1,6 +1,7 @@
 ---
 layout: paper
-title:ACPI implementation on FreeBSD 
+title: ACPI implementation on FreeBSD 
+date: 2002-01-01
 author: Takanori Watanabe
 email: 
 paper: /_assets/other2002_watanabe_acpi.pdf

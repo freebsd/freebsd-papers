@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: A Scalable Concurrent malloc(3) Implementation for FreeBSD
+date: 2006-01-01
 author: Jason Evans
 email: jasone@freebsd.org
 slides: /_assets/bsdcan2006_evans_jemalloc_slides.pdf

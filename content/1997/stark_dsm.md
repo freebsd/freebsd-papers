@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: A Distributed Shared Memory Facility for FreeBSD
+date: 1997-01-01
 author: Eugene Stark
 email: stark@freebsd.org
 paper: /_assets/usenix1997_stark_dsm.pdf

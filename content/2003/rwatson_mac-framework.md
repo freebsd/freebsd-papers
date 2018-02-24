@@ -1,6 +1,7 @@
 ---
 layout: paper
-title: The TrustedBSD MAC Framework: Extensible Kernel Access Control for FreeBSD 5.0
+title: "The TrustedBSD MAC Framework: Extensible Kernel Access Control for FreeBSD 5.0"
+date: 2003-01-01
 author: Robert Watson
 email: rwatson@freebsd.org
 paper: /_assets/usenix2003_rwatson_mac-framework.pdf

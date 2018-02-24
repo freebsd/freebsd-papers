@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: FreeBSD -- Not a Linux Distro 
+date: 2015-01-23
 author: George Neville-Neil
 email: gnn@freebsd.org
 slides: /_assets/freebsdnotlinux.pdf
