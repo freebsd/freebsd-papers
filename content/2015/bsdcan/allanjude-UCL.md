@@ -4,8 +4,7 @@ title: Universal Configuration Files
 date: 2015-07-01
 author: Allan Jude
 email: allanjude@freebsd.org
-slides: /_assets/326_UCL_for_FreeBSD.pdf
-video: https://youtu.be/8l6bhKIDecg
+youtube: 8l6bhKIDecg
 ---
 Most system administrators no longer edit configuration files by hand, they use automation and configuration management tools.
 Most utilities and daemons in the base system use their own custom configuration file format.
