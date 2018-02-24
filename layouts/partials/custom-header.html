@@ -1,0 +1,2 @@
+{{ $assetBusting := not .Site.Params.disableAssetsBusting }}
+<link href="{{"css/papers-custom.css" | relURL}}{{ if $assetBusting }}?{{ now.Unix }}{{ end }}" rel="stylesheet">

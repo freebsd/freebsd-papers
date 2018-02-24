@@ -1,0 +1,15 @@
+:root{
+    --MENU-SEARCH-BG-color: #252c31; /* Search field background color (by default borders + icons) */
+    --MENU-SEARCH-BOX-color: #000000; /* Override search field border color */
+    --MENU-SEARCH-BOX-ICONS-color: #ffffff; /* Override search field icons color */
+}
+
+#body {
+    margin-left: 400px;
+}
+
+#sidebar {
+    width: 400px;
+}
+
+
