@@ -13,7 +13,7 @@
     <ul>
     {{ range .Data.Pages }}
         <li>
-            <a href="{{.RelPermalink}}">{{.Date.Format "2006-01-02"}} | {{.Title}}</a>
+            <a href="{{.RelPermalink}}">{{.Params.Author}} &mdash; {{.Title}}</a>
         </li>
     {{ end }}
     </ul>
