@@ -6,8 +6,8 @@ Definitions:
 
 File and directory structure is as follows:
 static/_assets/ # Contains old asset files [FIXME]
-contents/{{year}}/{{conference|blank}}/{{name}}_{{subject}}.md
-contents/{{year}}/{{conference|blank}}/{{name}}_{{subject}}.files/{{name}}_{{subject}}_{{type}}.pdf
+contents/{{year}}/{{conference|blank}}/{{name}}-{{subject}}.md
+contents/{{year}}/{{conference|blank}}/{{name}}-{{subject}}.files/{{name}}-{{subject}}-{{type}}.pdf
 README.md # Self-explanatory
 structure.md # You are here
 
