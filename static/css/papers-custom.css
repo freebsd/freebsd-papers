@@ -12,8 +12,9 @@
     width: 400px;
 }
 
-.youtubeembed {
-    padding 15px;
+.small-video {
+    width: 640px;
+    margin: auto;
 }
 
 .video-responsive {
