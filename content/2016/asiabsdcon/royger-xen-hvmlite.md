@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: paper
 title: "Xen HVMlite and FreeBSD"
 date: 2016-03-12
 author: Roger Pau Monné

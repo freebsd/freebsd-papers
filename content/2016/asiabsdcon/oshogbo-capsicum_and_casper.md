@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: paper
 title: "Capsicum and Casper - a fairy tale about solving security problems"
 date: 2016-03-12
 author: Mariusz Zaborski

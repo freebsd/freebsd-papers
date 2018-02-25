@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: paper
 title: "FreeBSD Test Cluster Automation"
 date: 2016-03-12
 author: Kamil Czekirda
