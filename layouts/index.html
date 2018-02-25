@@ -16,8 +16,10 @@
 	<ul>
 	<!-- Ranges through content/post/*.md -->
         {{ range first 25 .Data.Pages }}
-          <li>
-		<a href="{{.RelPermalink}}">{{.Title}} &mdash; {{.Params.Author}}</a>
+          <li class="index-links">
+		<a href="{{.RelPermalink}}">
+			{{if eq (.Date.Format "2006") "0001"}}????{{else}}{{.Date.Format "2006"}}{{end}} | 
+			{{.Title}} &mdash; {{.Params.Author}}</a>
           </li>
 	{{ end }}
 	</ul>
