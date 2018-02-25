@@ -1,4 +1,6 @@
 :root{
+    --MAIN-LINK-color:#a31c1c; /* Color of links */
+
     --MENU-SEARCH-BG-color: #252c31; /* Search field background color (by default borders + icons) */
     --MENU-SEARCH-BOX-color: #000000; /* Override search field border color */
     --MENU-SEARCH-BOX-ICONS-color: #ffffff; /* Override search field icons color */
@@ -9,6 +11,10 @@
     --MENU-SECTION-ACTIVE-CATEGORY-color: #fff; /* Color of active category text */
     --MENU-SECTION-ACTIVE-CATEGORY-BG-color: #777; /* Color of background for the active category (only) */
 
+}
+
+body {
+    font-weight: normal;
 }
 
 #body {
