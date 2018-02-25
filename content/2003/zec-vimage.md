@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: Implementing a Clonable Network Stack in the FreeBSD Kernel 
+date: 2003-01-01
 author: Marko Zec
 email: zec@tel.fer.hr
 ---

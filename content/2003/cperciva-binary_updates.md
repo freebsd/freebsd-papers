@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: An Automated Binary Security Update System for FreeBSD
+date: 2003-01-01
 author: Colin Percival
 email: cperciva@freebsd.org
 ---

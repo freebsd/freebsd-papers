@@ -1,6 +1,7 @@
 ---
 layout: paper
 title: Kernel-Scheduled Entities for FreeBSD
+date: 2000-01-01
 author: Jason Evans 
 email: jasone@freebsd.org
 ---
