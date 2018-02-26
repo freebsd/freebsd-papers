@@ -2,7 +2,7 @@
 layout: paper
 title: An implementation of the Yarrow PRNG for FreeBSD
 date: 2002-02-13
-author: An implementation of the Yarrow PRNG for FreeBSD
+author: Mark Murray
 email: markm@freebsd.org
 youtube: id
 video: optional-link
