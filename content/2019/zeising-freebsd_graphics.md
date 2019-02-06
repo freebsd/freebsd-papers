@@ -1,5 +1,5 @@
 ---
-layout: slides
+layout: paper
 title: FreeBSD Graphics
 date: 2019-02-03
 author: Niclas Zeising
