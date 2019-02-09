@@ -7,3 +7,19 @@ To add a paper or talk:
 * If there are many talks from the same conference, create a subdirectory
 * create a lastname-title.files/ directory beside the .md file to store the attachments
 
+The site is built with [Hugo](https://gohugo.io/).
+
+To build the site locally:
+```sh
+# pkg install gohugo
+```
+
+To build the site locally:
+```sh
+$ hugo
+```
+
+To check it locally:
+```sh
+$ hugo server
+```
