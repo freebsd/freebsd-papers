@@ -2,7 +2,7 @@
 layout: paper
 title: "TLEM, very high speed link emulation"
 date: 2016-03-12
-author: Luigi Rizzo, Giuseppe Lettieri
+author: [ "Luigi Rizzo", "Giuseppe Lettieri" ]
 email: luigi@freebsd.org
 youtube: rlVYdDzhBi4
 ---

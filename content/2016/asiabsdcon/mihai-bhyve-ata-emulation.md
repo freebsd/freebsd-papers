@@ -2,7 +2,7 @@
 layout: paper
 title: "bhyve ATA emulation"
 date: 2016-03-12
-author: Mihai Carabas, Alexandru Teaca Ionut, Peter Grehan
+author: [ "Mihai Carabas", "Alexandru Teaca Ionut", "Peter Grehan" ]
 email: mihai@freebsd.org
 youtube: sK7JvbT4zAU
 ---
