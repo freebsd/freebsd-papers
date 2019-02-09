@@ -12,6 +12,8 @@ The site is built with [Hugo](https://gohugo.io/).
 To install the requirement for building the site:
 ```
 # pkg install gohugo
+$ git submodule init
+$ git submodule update
 ```
 
 To build the site locally:
