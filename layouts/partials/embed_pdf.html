@@ -1,0 +1,18 @@
+{{with .Params.paper}}
+{{$.Scratch.Add "pdfName" (printf "./content/%s%s/%s" $.Page.File.Dir (printf "%s.files" $.Page.File.BaseFileName) . )}}
+{{$.Scratch.Add "pdfURL" (printf "%s%s/%s" $.Page.File.Dir (printf "%s.files" $.Page.File.BaseFileName) . )}}
+{{if (fileExists ($.Scratch.Get "pdfName"))}}
+<section class="attachments blue">
+	<label>
+		<i class="fa fa-paperclip" aria-hidden="true"></i>
+		PDF: 
+		<a href="{{ $.Scratch.Get "pdfURL" | relURL }}">
+			{{.}}
+		</a>
+	</label>
+	<div class="video-responsive">
+		<iframe id="pdf" src="{{ $.Scratch.Get "pdfURL" | relURL }}" allowfullscreen="" frameborder="0" height="360" width="640"></iframe>
+	</div>
+</section>
+{{end}}
+{{end}}
