@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+    <ul>
+    {{ range $taxonomy_term, $taxonomy := .Site.Taxonomies }}
+	{{ range $key, $value := $taxonomy }}
+	{{ with $.Site.GetPage (printf "/%s/%s" $taxonomy_term $key) }}
+	<li hugo-nav="{{ .RelPermalink}}"><a href="{{ .Permalink | relURL }}">{{ .Name }}</a></li>
+	{{ end }}
+	{{ end }}
+    {{ end }}
+    </ul>
+
+{{ partial "footer.html" . }}

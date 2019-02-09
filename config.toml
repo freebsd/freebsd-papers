@@ -11,3 +11,6 @@ theme = "hugo-theme-learn"
 [params]
   subtitle = "The collected works of the FreeBSD community as presented at various conferences and summits."
   themeVariant = "red"
+
+[taxonomies]
+  author = "author"

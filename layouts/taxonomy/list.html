@@ -1,0 +1,13 @@
+{{ partial "header.html" . }}
+
+{{ .Content }}
+
+    <ul>
+    {{ with .Page }}
+    {{ range .Pages }}
+        <li hugo-nav="{{ .RelPermalink }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+    {{ end }}
+    </ul>
+
+{{ partial "footer.html" . }}

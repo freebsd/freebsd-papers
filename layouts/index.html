@@ -19,7 +19,7 @@
           <li class="index-links">
 		<a href="{{.RelPermalink}}">
 			{{if eq (.Date.Format "2006") "0001"}}????{{else}}{{.Date.Format "2006"}}{{end}} | 
-			{{.Title}} &mdash; {{.Params.Author}}</a>
+			{{.Title}} &mdash; {{ partial "aname.html" .Params.Author }}</a>
           </li>
 	{{ end }}
 	</ul>

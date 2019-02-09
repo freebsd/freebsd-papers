@@ -1,0 +1,5 @@
+{{ if (reflect.IsSlice .) }}
+{{ delimit . ", " ", and " }}
+{{ else }}
+{{ . }}
+{{ end }}

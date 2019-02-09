@@ -5,7 +5,7 @@
     <ul>
     {{ range .Sections }}
         <li>
-            <a href="{{.RelPermalink}}">{{.Title}}</a>
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
         </li>
     {{ end }}
     </ul>
@@ -13,7 +13,7 @@
     <ul>
     {{ range .Data.Pages }}
         <li>
-            <a href="{{.RelPermalink}}">{{.Title}} &mdash; {{.Params.Author}}</a>
+            <a href="{{ .RelPermalink }}">{{ .Title }} &mdash; {{ partial "aname.html" .Params.Author }}</a>
         </li>
     {{ end }}
     </ul>
