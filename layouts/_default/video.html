@@ -1,7 +1,7 @@
 {{ partial "header.html" . }}
   {{ if isset .Params "author" }}
     <span class="author">
-    {{ partial "aname.html" .Params.Author }}
+    {{ partial "alink.html" . }}
     {{ if isset .Params "email" }}
       &lt;<span class="author-email">{{ .Params.email }}</span>&gt;
     {{ end }}

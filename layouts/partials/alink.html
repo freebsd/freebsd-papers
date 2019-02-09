@@ -1,0 +1,12 @@
+{{ if (reflect.IsSlice .Params.Author) }}
+  {{ range $index, $author := .Params.Author }}
+    {{- if eq $index (sub ( len $.Params.Author ) 1 ) }}, and {{ else if gt $index 0 }}, {{ end -}}
+    {{ with $.Site.GetPage (printf "/author/%s" ( $author | urlize )) -}}
+      <a href="{{ .RelPermalink }}">{{ $author }}</a>
+    {{- end -}}
+  {{- end -}}
+{{ else }}
+{{ with $.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )) -}}
+  <a href="{{ .RelPermalink }}">{{ $.Params.Author }}</a>
+{{- end -}}
+{{ end }}
