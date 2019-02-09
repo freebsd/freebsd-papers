@@ -3,9 +3,8 @@ layout: slides
 title: IT automation with Puppet
 date: 2018-06-09
 author: Romain Tartière
-email: romain@
+email: romain@freebsd.org
 youtube: Cb4VmhuyIMo
-video: optional-link
 ---
 
 Puppet is a Free/Libre configuration management tool. Rarely used standalone,
