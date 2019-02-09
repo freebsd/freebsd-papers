@@ -9,17 +9,17 @@ To add a paper or talk:
 
 The site is built with [Hugo](https://gohugo.io/).
 
-To build the site locally:
-```sh
+To install the requirement for building the site:
+```
 # pkg install gohugo
 ```
 
 To build the site locally:
-```sh
+```
 $ hugo
 ```
 
 To check it locally:
-```sh
+```
 $ hugo server
 ```
