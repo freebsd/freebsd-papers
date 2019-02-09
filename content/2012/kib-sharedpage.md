@@ -1,6 +1,6 @@
 ---
 layout: slides
-title: FreeBSD ABI: Shared Page
+title: "FreeBSD ABI: Shared Page"
 date: 2012-09-29
 author: Konstantin Belousov
 email: kib@

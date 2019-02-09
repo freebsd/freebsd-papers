@@ -1,6 +1,6 @@
 ---
 layout: slides
-title: FreeBSD: problems of the project
+title: "FreeBSD: problems of the project"
 date: 2010-09-25
 author: Konstantin Belousov
 email: kib@
