@@ -4,7 +4,7 @@ title: FreeBSD Graphics
 date: 2019-02-03
 author: Niclas Zeising
 email: zeising@FreeBSD.org
-video: https://fosdem.org/2019/schedule/event/freebsd_graphics/
+video: https://video.fosdem.org/2019/K.3.401/freebsd_graphics.mp4
 ---
 In this presentation I will talk about the FreeBSD Graphics effort and the team behind it.
 
