@@ -6,7 +6,6 @@
     {{- end -}}
   {{- end -}}
 {{ else }}
-{{( .Params.Author | urlize )}}
   {{ if ($.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )))}}
     {{ with $.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )) -}}
       <a href="{{ .RelPermalink }}">{{ $.Params.Author }}</a>
