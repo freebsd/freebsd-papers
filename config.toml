@@ -4,6 +4,7 @@ title = "FreeBSD Presentations and Papers"
 publishDir = "public_html"
 pluralizeListTitles = false
 theme = "hugo-theme-learn"
+preserveTaxonomyNames = true
 
 [permalinks]
   post = "/:year/:title/"
