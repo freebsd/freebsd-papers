@@ -1,7 +1,7 @@
 ---
 layout: paper
 title: Jails: Confining the omnipotent root
-date: 2002-05-03
+date: 2000-05-22
 author: [ "Poul-Henning Kamp", "Robert N. M. Watson" ]
 email: [ "phk@FreeBSD.org", "rwatson@FreeBSD.org"]
 ---
