@@ -6,7 +6,17 @@
     {{- end -}}
   {{- end -}}
 {{ else }}
-{{ with $.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )) -}}
-  <a href="{{ .RelPermalink }}">{{ $.Params.Author }}</a>
-{{- end -}}
+{{( .Params.Author | urlize )}}
+  {{ if ($.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )))}}
+    {{ with $.Site.GetPage (printf "/author/%s" ( .Params.Author | urlize )) -}}
+      <a href="{{ .RelPermalink }}">{{ $.Params.Author }}</a>
+    {{- end -}}
+  {{/* XXX: Hugo Bug? https://github.com/gohugoio/hugo/issues/5687 */}}
+  {{ else if ($.Site.GetPage (printf "/author/%s" ( replace .Params.Author " " "-" | lower )))}}
+    {{ with $.Site.GetPage (printf "/author/%s" ( replace .Params.Author " " "-" | lower )) -}}
+      <a href="{{ .RelPermalink }}">{{ $.Params.Author }}</a>
+    {{- end -}}
+  {{ else }}
+  {{ .Params.Author }}
+  {{ end}}
 {{ end }}
