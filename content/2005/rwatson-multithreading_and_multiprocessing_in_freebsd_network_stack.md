@@ -2,6 +2,6 @@
 layout: paper
 title: Introduction to Multithreading and Multiprocessing in the FreeBSD SMPng Network Stack
 date: 2005-11-26
-author: Robet Watson
+author: Robert Watson
 email: rwatson@freebsd.org
 ---
