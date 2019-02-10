@@ -86,16 +86,16 @@
 </nav>
 
 <!-- templates -->
-{{- define "papers-tree-nav" -}}
+{{ define "papers-tree-nav" }}
 	{{- $showvisitedlinks := .showvisitedlinks -}}
 	{{- $currentNode := .currentnode -}}
 	{{ with .sect }}
 		{{- if .IsSection -}}
 			{{ safeHTML .Params.head }}
 			<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item 
-				{{- if .IsAncestor $currentNode -}}parent{{- end -}}
-				{{- if eq .UniqueID $currentNode.UniqueID -}}active{{- end -}}
-				{{- if .Params.alwaysopen -}}parent{{- end -}}
+				{{- if .IsAncestor $currentNode }} parent {{ end -}}
+				{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
+				{{- if .Params.alwaysopen }} parent {{ end -}}
 			">
 				<a href="{{.RelPermalink -}}">
 					<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
@@ -108,12 +108,12 @@
 					<ul class="range-sections">
 					{{- range .Sections }}
 						<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item 
-							{{- if .IsAncestor $currentNode -}}parent{{- end -}}
-							{{- if eq .UniqueID $currentNode.UniqueID -}}active{{- end -}}
-							{{- if .Params.alwaysopen -}}parent{{- end -}}
+							{{- if .IsAncestor $currentNode }} parent {{ end -}}
+							{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
+							{{- if .Params.alwaysopen }} parent {{ end -}}
 						">
-							<a href="{{.RelPermalink -}}">
-								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
+							<a href="{{ .RelPermalink }}">
+								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) }}fa-angle-double-down{{ else }}fa-angle-double-right{{ end }}"></i>
 								{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{safeHTML .Params.Post }}
 								{{- if $showvisitedlinks -}}
 									<i class="fa fa-check read-icon"></i>
@@ -125,7 +125,7 @@
 									{{ range .Pages -}}
 										{{- if and .Params.hidden (not $.showhidden) -}} 
 										{{- else -}}
-											{{- template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks -}}
+											{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
 										{{- end -}}
 									{{- end }}
 									</ul>
@@ -136,7 +136,7 @@
 					{{- range .Pages -}}
 						{{- if and .Params.hidden (not $.showhidden) -}} 
 						{{- else -}}
-							{{- template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks -}}
+							{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
 						{{- end -}}
 					{{- end }}
 					</ul>
@@ -144,7 +144,7 @@
 			</li>
 		{{ else }}
 			{{ if not .Params.Hidden }}
-				<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item {{- if eq .UniqueID $currentNode.UniqueID -}}active{{- end -}}">
+				<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item {{ if eq .UniqueID $currentNode.UniqueID }}active{{ end }}">
 					<a href="{{ .RelPermalink }}">
 						<i class="fa fa-angle-right papers-menu-item"></i>
 						{{ safeHTML .Params.Pre }} {{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
@@ -154,4 +154,4 @@
 			{{ end }}
 		{{- end -}}
 	{{- end -}}
-{{- end -}}
+{{ end }}
