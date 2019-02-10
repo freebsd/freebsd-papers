@@ -1,0 +1,5 @@
+{{- if (reflect.IsSlice .) -}}
+&lt;<span class="author-email">{{- delimit . "</span>&gt;, &lt;<span class=\"author-email\">" -}}</span>&gt;
+{{- else -}}
+&lt;<span class="author-email">{{- . -}}</span>&gt;
+{{- end -}}

@@ -3,7 +3,7 @@
     <span class="author">
     {{ partial "alink.html" . }}
     {{ if isset .Params "email" }}
-      &lt;<span class="author-email">{{ .Params.email }}</span>&gt;
+      {{ partial "email.html" .Params.email }}
     {{ end }}
     </span>
   {{ end }}
