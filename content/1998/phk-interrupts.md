@@ -1,6 +1,6 @@
 ---
 layout: paper
-title: Raw data: Interrupt latency measurements
+title: "Raw data: Interrupt latency measurements"
 date: 1998-07-02
 author: Poul-Henning Kamp
 email: phk@FreeBSD.org 
