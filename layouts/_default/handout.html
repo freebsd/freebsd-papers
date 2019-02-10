@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+  {{ if isset .Params "author" }}
+    <span class="author">
+    {{ partial "alink.html" . }}
+    {{ if isset .Params "email" }}
+      &lt;<span class="author-email">{{ .Params.email }}</span>&gt;
+    {{ end }}
+    </span>
+  {{ end }}
+
+{{ .Content }}
+
+{{ partial "attachments.html" . }}
+
+{{ partial "video-embed.html" . }}
+
+{{ partial "footer.html" . }}

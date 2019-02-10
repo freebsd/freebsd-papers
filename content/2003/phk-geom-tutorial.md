@@ -1,5 +1,5 @@
 ---
-layout: handouts
+layout: handout
 title: GEOM tutorial
 date: 2003-09-11
 author: Poul-Henning Kamp
