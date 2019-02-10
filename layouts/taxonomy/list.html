@@ -4,9 +4,9 @@
 
     <ul>
     {{ with .Page }}
-    {{ range .Pages }}
-        <li hugo-nav="{{ .RelPermalink }}"><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-    {{ end }}
+      {{ range .Pages }}
+	<li hugo-nav="{{ .RelPermalink }}"><a href="{{ .RelPermalink }}">{{ .Title }} ({{ .Section }})</a></li>
+      {{ end }}
     {{ end }}
     </ul>
 
