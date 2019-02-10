@@ -99,7 +99,7 @@
 			">
 				<a href="{{.RelPermalink -}}">
 					<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
-					{{- safeHTML .Params.Pre -}}{{- or .Params.menuTitle .LinkTitle .Title -}}{{- safeHTML .Params.Post -}}
+					{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
 					{{- if $showvisitedlinks -}}
 						<i class="fa fa-check read-icon"></i>
 					{{- end }}
@@ -114,7 +114,7 @@
 						">
 							<a href="{{.RelPermalink -}}">
 								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
-								{{ safeHTML .Params.Pre -}}{{- or .Params.menuTitle .LinkTitle .Title -}}{{safeHTML .Params.Post }}
+								{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{safeHTML .Params.Post }}
 								{{- if $showvisitedlinks -}}
 									<i class="fa fa-check read-icon"></i>
 								{{- end }}
@@ -146,8 +146,8 @@
 			{{ if not .Params.Hidden }}
 				<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item {{- if eq .UniqueID $currentNode.UniqueID -}}active{{- end -}}">
 					<a href="{{ .RelPermalink }}">
-						<i class="fa fa-angle-right" papers-menu-item></i>
-						{{ safeHTML .Params.Pre -}}{{ or .Params.menuTitle .LinkTitle .Title -}}{{ safeHTML .Params.Post }}
+						<i class="fa fa-angle-right papers-menu-item"></i>
+						{{ safeHTML .Params.Pre }} {{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
 						{{- if $showvisitedlinks -}}<i class="fa fa-check read-icon"></i>{{- end }}
 					</a>
 				</li>
