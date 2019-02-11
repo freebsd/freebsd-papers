@@ -1,6 +1,6 @@
 ---
 layout: paper
-title: "How to bootstrap a BSD conference
+title: "How to bootstrap a BSD conference"
 date: 2018-06-09
 author: Li-Wen Hsu
 email: lwhsu@FreeBSD.org
