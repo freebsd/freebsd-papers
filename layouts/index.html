@@ -15,7 +15,7 @@
         <!-- Note that .Data.Pages is the equivalent of .Site.Pages on the homepage template. -->
 	<ul>
 	<!-- Ranges through content/post/*.md -->
-        {{ range first 25 .Data.Pages }}
+        {{ range .Data.Pages }}
           <li>
 		<a href="{{.RelPermalink}}">
 			{{if eq (.Date.Format "2006") "0001"}}????{{else}}{{.Date.Format "2006"}}{{end}} | 
