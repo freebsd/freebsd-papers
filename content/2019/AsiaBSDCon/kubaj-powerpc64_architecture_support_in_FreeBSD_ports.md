@@ -3,6 +3,7 @@ layout: paper
 title: "powerpc64 architecture support in FreeBSD ports"
 date: 2019-03-23
 author: Piotr Kubaj
+email: pkubaj@anongoth.pl
 paper: kubaj-powerpc64_architecture_support_in_FreeBSD_ports.pdf
 ---
 ## powerpc64 architecture support in FreeBSD ports
