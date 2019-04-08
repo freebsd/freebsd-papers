@@ -1,4 +1,4 @@
-clear---
+---
 layout: paper
 title: "bhyve - Improvements to Virtual Machine State Save and Restore"
 date: 2019-03-24
