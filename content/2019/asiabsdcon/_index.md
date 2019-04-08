@@ -1,5 +1,5 @@
 ---
-title: AsiaBSDCon 2019
+title: AsiaBSDCon
 ---
 March 21-24, 2019, Tokyo University of Science, Tokyo, Japan.
 
