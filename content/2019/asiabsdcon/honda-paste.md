@@ -4,9 +4,6 @@ title: "Doubling FreeBSD request-response throughputs over TCP with PASTE"
 date: 2019-03-23
 author: Michio Honda and Giuseppe Lettieri
 email: micchie@sfc.wide.ad.jp
-slides: 
-paper:
-video: https://video.fosdem.org/2019/K.1.105/zfs_caching.mp4
 ---
 Request-response workloads are common in practice, including key value stores,
 RPC and other HTTP workloads. Performance of these workload is largely limited
