@@ -2,7 +2,7 @@
 layout: slides
 title: "Automating Network Infrastructures with Ansible on FreeBSD"
 date: 2018-06-08
-author: Sabrina M
+author: Sabina M
 youtube: rMRV5uQwQeY
 paper: m_Automating_Network_Infrastructures_with_Ansible_on_FreeBSD.pdf
 ---
