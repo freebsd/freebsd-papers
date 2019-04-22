@@ -3,7 +3,7 @@ layout: video
 title: "100x Faster Clone Deletion for ZFS"
 date: 2019-06-08
 author: Sara Hartse
-email: sara dot hartse at delphix dot com
+email: sara.hartse@delphix.com
 youtube: yQGGwhDxkdw
 ---
 Why is deleting a clone so much slower than writing one? Does it have to be? This talk will cover how ZFS clone deletion works today and why its performance is terrible in certain situations. I will present a new algorithm which addresses this problem and speeds up clone deletion by 100x. I’ll cover the design details and performance tradeoffs of the new method.
