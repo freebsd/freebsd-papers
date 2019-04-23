@@ -1,7 +1,7 @@
 ---
 layout: paper
 title: "A Public-Key Trust Infrastructure for FreeBSD"
-date: 2019-06-08
+date: 2018-06-08
 author: Eric McCorkle
 youtube: DYHhTT05_7E
 paper: mccorkle-A_Public-Key_Trust_Infrastructure_for_FreeBSD-paper.pdf
