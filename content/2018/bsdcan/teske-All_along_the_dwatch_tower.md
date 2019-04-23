@@ -1,7 +1,7 @@
 ---
 layout: video
 title: "All along the dwatch tower: A DTrace tool for the masses"
-date: 2019-06-08
+date: 2018-06-08
 author: Devin Teske
 email: dteske@FreeBSD.org
 youtube: xqOl_HY86n8
