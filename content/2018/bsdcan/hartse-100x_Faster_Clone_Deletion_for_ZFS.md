@@ -1,7 +1,7 @@
 ---
 layout: video
 title: "100x Faster Clone Deletion for ZFS"
-date: 2019-06-08
+date: 2018-06-08
 author: Sara Hartse
 email: sara.hartse@delphix.com
 youtube: yQGGwhDxkdw
