@@ -22,3 +22,4 @@ var player = new Clappr.Player({
 });
 </script>
 
+[RTMP Link (Lower Latency)](rtmp://bsdcan-vsn.secdn.net/bsdcan-live/play/DMS1140)
