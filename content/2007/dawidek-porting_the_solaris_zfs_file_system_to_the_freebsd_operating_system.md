@@ -1,6 +1,6 @@
 ---
 layout: paper
-title: "Porting the Solaris ZFS file system to th FreeBSD operating system"
+title: "Porting the Solaris ZFS file system to the FreeBSD operating system"
 date: 2007-05-27
 author: Pawel Jakub Dawidek
 email: pjd@
