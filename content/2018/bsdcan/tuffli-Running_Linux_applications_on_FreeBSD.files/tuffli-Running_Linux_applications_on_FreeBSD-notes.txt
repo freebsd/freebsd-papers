@@ -1,0 +1,392 @@
+Abstract
+========
+While FreeBSD has been able to run Linux binaries for many years, the large ecosystem of Docker images leads to some interesting use cases for FreeBSD developers and users. This talk will review how the various kernel modules run Linux binaries, several ways to use this functionality, and the work in progress to improve the Linux syscall compatibility.
+
+Description
+===========
+FreeBSD has been able to run Linux binaries since 1995, not through virtualization or emulation, but by understanding the Linux executable format and providing a Linux specific system call table. Originally, this was for the noble goal of playing the video game, Doom. Over time, many Linux applications and libraries have been packaged and made available through the FreeBSD Ports Collection. But because FreeBSD tools do not understand Linux package dependencies, this process is manual and time consuming.
+
+Docker has popularized the use of Linux Containers, similar to FreeBSD's jails, but more importantly, has lead to publishing a wide variety of both Linux system and application images. These images allow FreeBSD users to download a variety of Linux system images and use the native tools to provide applications not available through the Ports Collection.
+
+This started as a simple quest to build Linux device drivers and applications on my FreeBSD system, but the journey has lead to an understanding of the inner workings of the Linux Binary Compatibility layer. It started by running applications from ports, progressed to chroot'd Docker image based environments, and has end up in Docker image based jails. The talk will cover the technology behind this capability as well as examples of using this in practice. Additionally, it will cover some of my work-in-progress to enhance the Linux support for network sockets, capabilities (a.k.a. privileges), mremap, and others.
+
+Preface
+=======
+
+Hi, my name is Chuck. This is my first time at BSDCan, and for some reason, I thought the most appropriate topic for a large BSD conferences would be, Linux. This talk will cover Linux binary support on FreeBSD, some of the ways to use it, and a bit of my work to improve the current support.
+
+A couple of notes. I'm a FreeBSD developer by choice and write Linux drivers because that pays the bills. So, while I'm familiar with the GNU/Linux vs Linux naming debate, I don't really care and will interchangeably use 'Linux' to refer to both the kernel and the operating system. Also, I don't hate Linux; it has been good to me over the years. So take any good natured snarkiness that follows as just that, good natured. But if you feel compelled to correct me about the naming or want me to stop being mean to Linux, please do so. The email address to use for this should be r stallman at gnu.org
+
+Motive
+======
+
+There was a great Canadian TV show called "Motive". My wife loved it because the opening scene always showed the murderer killing the victim. The remainder of the episode worked through the events leading up to the crime.
+
+[root@fluffy fabric]# uname -srv
+Linux 51.50.0 FreeBSD 12.0-CURRENT #26 fa797a5a3(trueos-stable-18.03): Mon Mar
+[root@fluffy fabric]# make KVER=3.10.0-693.2.2.el7.x86_64    
+make -C /lib/modules/3.10.0-693.2.2.el7.x86_64/build/ M=/home/ctuffli/dev/hostsw/ape-drvr/fabric modules
+make[1]: Entering directory `/usr/src/kernels/3.10.0-693.2.2.el7.x86_64'
+  CC [M]  /home/ctuffli/dev/hostsw/ape-drvr/fabric/eth.o
+  CC [M]  /home/ctuffli/dev/hostsw/ape-drvr/fabric/eth-disco.o
+  LD [M]  /home/ctuffli/dev/hostsw/ape-drvr/fabric/nvmeth.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/ctuffli/dev/hostsw/ape-drvr/fabric/nvmeth.mod.o
+  LD [M]  /home/ctuffli/dev/hostsw/ape-drvr/fabric/nvmeth.ko
+make[1]: Leaving directory `/usr/src/kernels/3.10.0-693.2.2.el7.x86_64'
+[root@fluffy fabric]#
+
+In that spirit, here is the proverbial "murder" of this talk. The output is from a terminal running a couple of commands. The bottom command is what building a Linux kernel device driver looks like if you've never had the pleasure. The top command is uname(1) which displays information about the system. Confusingly, this shows the system is running both a version of Linux and FreeBSD. What this is, in fact, is a chroot'ed CentOS 7 Docker image running via FreeBSD's "Linuxulator". The Linux version number is completely made up, but some of you might know the police code 5150 describes an involuntary psychiatric hold. Its presence here is probably coincidental. Probably.
+
+History
+=======
+
+When working on the background for this talk, I came across a mention that Linux support has been in FreeBSD since 1995. Figuring this must be a typo, I dug back through the commit messages and found this. And yes, in fact, Linux support in FreeBSD has been available since nearly the start of the project. Note that this feature was added for the noble goal of running the video game, Doom.
+
+$ svn log -r9313
+------------------------------------------------------------------------
+r9313 | sos | 1995-06-25 10:32:43 -0700 (Sun, 25 Jun 1995) | 11 lines
+
+First incarnation of our Linux emulator or rather compatibility code.
+This first shot only incorporaties so much functionality that DOOM
+can run (the X version), signal handling is VERY weak, so is many
+other things. But it meets my milestone number one (you guessed it
+- running DOOM).
+
+Uses /compat/linux as prefix for loading shared libs, so it won't
+conflict with our own libs.
+
+Kernel must be compiled with "options COMPAT_LINUX" for this to work.
+
+------------------------------------------------------------------------
+
+The Triad
+=========
+ - Matching ISA
+ - Syscall support
+ - execve(2) and ELF "branding"
+
+So, how is FreeBSD able to run unmodified Linux binaries? The pre-condition for any of this, is that the underlying CPU architecture matches the binaries being run. For example, if the FreeBSD host is running on an x86 processor, the Linux binaries must also use the x86 instruction set, or ISA. The same rule holds for other processors like ARM. This differs from machine emulators like Qemu which are able to emulate one instruction set on a completely different CPU architecture. And avoiding this translation means Linux applications can run at or near native speed on a FreeBSD system.
+
+But most interesting applications are not self-contained, and they need support from the operating system to allocate memory, open files, etc.. UNIX and UNIX-like systems do this via well defined system calls. And because both FreeBSD and Linux provide POSIX compatible environments, they support many of the same system calls. Thus, when Linux applications make system calls, the FreeBSD kernel, only needs to map the Linux parameters to their FreeBSD equivalents. The rest of the system call is identical to one made by a native FreeBSD application. In other cases, the system call has no analogue in FreeBSD and must be specially implemented by the kernel.
+
+This Linux system call functionality resides in three modules:
+ - linux.ko : contains 32-bit system calls
+ - linux64.ko : contains 64-bit system calls
+ - linux_common.ko : contains functionality common to both 32 and 64 bit implementations
+And, when compiled as loadable modules, the OS can simultaneously run both 32 and 64-bit applications.
+
+But how does the kernel know when to use Linux and when to use FreeBSD? The magic happens in execve(2). This system call creates a new process from a file. For example, running ls from a shell calls execve with the file /bin/ls. The kernel then tries to match the file to a "loader", one for each of the supported file types. These types include shell, a.out, gzip, and ELF (Executable and Linking Format) with ELF being the most common type for applications on both FreeBSD and Linux. The ELF loader then looks at the "File identification" field (e_ident) of the ELF header to determine the ABI (Application Binary Interface a.k.a. the OS ABI or for ELF, EI_OSABI). This value is the "branding" of the binary and differentiates Linux from FreeBSD. With this information, the kernel can now determine whether to load the FreeBSD or Linux system call tables for this process. The per-process system call table also explains why the OS can run both 32 and 64-bit Linux binaries.
+
+There is one more wrinkle in the loader magic: the emulation path. This allows Linux branded binaries to "re-root" themselves under a different file path. For Linux, this path is /compat/linux. By having an emulation path, a Linux binary loading the C library (e.g. libc.so), for example, will pick up the libc.so under /compat/linux instead of using the base system's version of the library.
+
+execve(2)
+    do_execve()
+        if (sv_imgact_try)
+		sv_imgact_try(imgp);  // checks if image path should be re-rooted under /compat/linux
+        for (i=0; ...)
+	    (*execsw[i]->ex_imgact)(imgp);	// ELF image activator
+	        __elfN(imgact)(...)
+		    __elfN(get_brandinfo)(...)
+		        for (i=0; i<MAX_BRANDS; i++)
+			    if (e_ident[EI_OSABI] == brand) ...
+			        <found it!>
+		    exec_new_vmspace(imgp, sv);	// sv is Linux sysvec table
+		    ...
+		    if (brand_info->emul_path ...)
+		        
+
+.emul_path "/compat/linux"
+.interp_path "/lib64/ld-linux.so.2"
+.sysvec &elf_linux_sysvec
+
+Emulation?
+==========
+So is this mechanism really better described as Linux emulation? Well, emulation is one system imitating the behavior of another system without that innate or native behavior. From an instruction set point of view, this is clearly not emulation as the ISA's must match. From a system call point of view, the answer depends on the system call, and in many cases, the answer is still no. But as we will see later for the Linux specific pseudo-file systems, the answer is definitely yes. Taken as a whole, the answer is, "it's complicated" and leads to fabricating a name to describe all of this, namely, the Linuxulator.
+
+The Easy Button
+===============
+The easiest way to get started running Linux applications is via the FreeBSD package system. These packages are no different from installing any other applications in that you run `pkg install foo'. Depending on the application's requirements, they will pull in dependant libraries from either CentOS 6 or 7. Assuming the Linux modules are loaded, the applications 'just run'. Here are some of the available applications:
+
+	enemyterritory - Wolfenstein: Enemy Territory video game 
+	hamachi - VPN software
+	icc - Intel C/C++ compiler
+	kzip - compressor
+	oracle - Oracle database client
+	pocketreader - handheld OCR scanner
+	quake3 - shoot-em-up video game
+	rtc - real-time clock device
+	seatools - Seagate SeaTools
+	skype - video chat / conferencing
+	stuffit - archiver
+	telegram - desktop messaging
+
+You can see the choices run the gamut from games, to VPN software, to chat and messaging applications. Note that these are FreeBSD packages (i.e. .pkg), not Red Hat packages (i.e. .rpm). FreeBSD's package manager doesn't understand Red Hat or Debian package formats or their repositories. Instead, kind-hearted volunteers have converted the various RPM's to their PKG equivalent by hand. The process includes extracting the files from the RPM using rpm2cpio, determining the package's dependencies, and re-encoding all of this in a port's Makefile. The process for a single package isn't difficult, but an application can pull in dozens of supporting packages. The dependencies are what prevent this process from scaling.
+
+Building Drivers
+================
+For my quest to build Linux device drivers, the dependencies are not horrible, but also not trivial. Converting the Linux build header RPM's to packages would be relatively straight forward. And some of the build tools (make, the compiler, etc.) had already been converted to packages. All told, this effort would involve converting 6 or 7 new RPM's. The bigger issue was the environment. While some application don't care about their installed location, build and development tools are different. They expect header files and libraries in specific places. Granted, in some cases, it is possible to have them look in alternate locations, but in general, they do not deal with the re-rooting that would be necessary on FreeBSD. This becomes more true as the Linux kernel build environment is complex and has its own ideas about how things work.
+
+The FreeBSD wiki has an article on "Cross development of Linux binaries on a FreeBSD system" (https://wiki.freebsd.org/linux-xdev) which has a good discussion on the approach taken to integrate Linux applications into a FreeBSD system and why this general approach fails for the specific case of building Linux applications. In a nut shell, the answer is to create a mini Linux environment and use chroot to trick the Linux build tools into thinking everything is in order. The bones of the article are good, but the solution uses an obsolete package. So while it points in the right direction, the recipe isn't immediately useful. And recreating a similar package is problematic in that my knowledge of how Linux systems are assembled amounts to: load the install CD, click 'Next','Next','Next', 'Static IP', 'Next, 'Done', wait 10 minutes, and reboot into a running system. Given that there are approximately 2.7 million different Linux distributions, the process *probably* isn't hard, but also felt daunting and like something I didn't want to re-invent. While encouraging, this was a fail.
+
+LXC
+===
+One of my previous employers shipped an appliance based on Ubuntu 10.04, the "10" indicating software originally released in 2010. Over time, it became difficult to replace the build server as this version of Ubuntu would not install on new hardware. The solution was to buy the new, bigger, and faster server, install a version of Ubuntu which recognized the hardware, and then use Linux Containers (a.k.a. LXC) to run an instance of Ubuntu 10.04 to build the appliance's software. Linux Containers are a form of OS virtualization and look like FreeBSD's jails ... provided you are farsighted and don't have your glasses handy. For the purpose of this discussion, the main similarity is the sharing of a single kernel between multiple user spaces. And like jails, the container's user space can be older than the kernel. Containers have the nice property of being able to use the distribution's normal package management tools to keep their software up to date. To create a container, the LXC tools use "templates", basically BASH shell scripts to create the directory structure, download RPM's with curl, install them under the appropriate directory, and create configuration files for LXC. This felt like a good recipe for installing a Linux user space environment as all the tools are also available on FreeBSD.
+
+https://gist.github.com/mattwillsher/3483828
+...
+    dev_path="${rootfs_path}/dev"
+    rm -rf $dev_path
+    mkdir -p $dev_path
+    mknod -m 666 ${dev_path}/null c 1 3
+...
+    # download a mini centos into a cache
+    echo "Downloading centos minimal ..."
+    YUM="yum --installroot $INSTALL_ROOT -y --nogpgcheck"
+    PKG_LIST="yum initscripts passwd rsyslog vim-minimal dhclient chkconfig"
+...
+
+    mkdir -p $INSTALL_ROOT/var/lib/rpm
+    rpm --root $INSTALL_ROOT  --initdb
+    rpm --root $INSTALL_ROOT -ivh $INSTALL_ROOT/centos-release-$release-$releaseminor.centos.$arch.rpm
+    $YUM install $PKG_LIST
+    chroot $INSTALL_ROOT rm -f /var/lib/rpm/__*
+    chroot $INSTALL_ROOT rpm --rebuilddb
+...
+
+And it would have been perfect except that the port of rpm to FreeBSD (a heroic effort, by the way) core dumps part way through the process. For some reason. It turns out rpm is a *huge* application with an even bigger set of ancillary scripts and libraries. Figuring out why this failed was not the project I had in mind. Again, encouraging, but still a fail.
+
+Windows Subsystem for Linux
+===========================
+And just when you thought a talk at a BSD conference couldn't go any further into the weeds, let's talk about Windows.
+
+Windows Subsystem for Linux, or WSL, is a compatibility layer which allows Windows to run unmodified Linux binaries. Windows does this by creating special processes with a system call table compatible with Linux ELF binaries. As Microsoft worked with Canonical to develop this, the original environment was Ubuntu and used the apt(1) tools for package management. While this matched my needs, other users wanted the environment from SUSE, or RedHat, and so on. One enterprising user discovered WSL kept the Linux root file system separate from the user's directory, and theorized that it should be possible to swap out environments by updating this directory.
+
+    https://lab.rolisoft.net/blog/switching-the-distribution-behind-the-windows-subsystem-for-linux.html
+
+He put together a set of Python scripts to download OS distributions by name and install them under WSL. While those scripts aren't applicable to FreeBSD, the approach is. The key observation was Docker Hub, a registry of images (a.k.a. tar-balls) used by the Docker tools, could be the universal source for all Linux environments. On FreeBSD, we too can download the base image for CentOS, Debian, SUSE, etc. from
+
+    https://github.com/docker-library/official-images
+
+as a tar-ball, create a ZFS dataset, and extract the image into the dataset. Depending on the need, you could use the image 'as is', perhaps replacing it when the maintainers update it on Docker Hub. Alternatively, it is possible to chroot into that directory and run the distribution's native package manager to install other libraries, tools, and applications. Now we have a way to create base images, but they need several other pieces of functionality to make the environment "real" for Linux.
+
+Helpers
+=======
+While FreeBSD's Linux binary compatibility is not emulation, there are several "helper" modules which do emulate Linux functionality.
+
+linprocfs(5)
+The linprocfs driver adds an emulated Linux process file system (a.k.a. /proc/*) for a subset of the entries found on actual Linux systems. You would use mount(2) to add this capability. E.g.
+    # mount -t linprocfs linproc /compat/linux/proc
+Much like the Linux counter part, this is a virtual or pseudo file system, meaning, the directory entries are not associated with any block or character devices. It allows user applications to access certain information from the kernel regarding its own, and possibly, other processes. The file system contains a directory for each of the running processes named after the process ID. The process directories contain files giving the command line which started the process ("cmdline"), the environment variables ("environ"), a directory of all open file descriptors for this process ("fd"), information about the mapped memory ("mem"), and many others.
+The top level directory also contains non-process related information including kernel boot options ("cmdline"), CPU information ("cpuinfo"), time since booting ("uptime"), kernel version number ("version"), and many others.
+Note that jails can prevent the use of this pseudo file system (via the allow.mount and allow.mount.linprocfs parameters). See jail(8) for more details.
+
+linsysfs(5)
+The linsysfs driver adds an emulated Linux kernel subsystem file system (a.k.a. /sys/*) for a subset of the entries found on actual Linux systems. Again, you would use mount(2) similar to the below to add this capability to the system. E.g.
+    # mount -t linsysfs linsys /compat/linux/sys
+Like its Linux counter part, this is a pseudo file system containing information about kernel subsystems, hardware devices, and some device drivers. The usage is similar to sysctl but uses virtual files instead of MIB entries. Many Linux user space utilities such as lspci ("list PCI devices"), lsscsi ("list SCSI devices"), etc. format or re-package the information found under /sys in a more human readable fashion.
+As you might expect, jails can allow or prevent the use of this pseudo file system (via the allow.mount and allow.mount.linsysfs parameters). See jail(8) for more details.
+
+devfs(5)
+The device file system provides limited access to kernel devices for user applications. The base OS will mount this file system on /dev, but it can be mounted multiple times in other locations to support jailed or chroot'ed setups. Use a mount(2) command similar to the below to add this capability. E.g.
+    # mount -t devfs devfs /compat/linux/dev
+Jails can prevent outright the use of this file system (via the allow.mount and allow.mount.devfs parameters), but this is typically not what is desired. Instead, administrators should use devfs(8) and devfs_ruleset to limit the information provided to a specific jail via the devfs command.
+Note that jailed or chroot'ed environments will need this as accessing /dev/null, /dev/zero, etc. are common operations.
+
+fdescfs(5)
+The file-descriptor file system provides access to the file descriptors opened by a process. You use a mount(2) command similar to the below to enable this capability. E.g.
+    # mount -t fdescfs -o linrdlnk null /compat/linux/dev/fd
+Note the linrdlnk option provides Linux specific behaviors to the entries under /dev/fd. Specifically, the files are symbolic links to the actual files opened by the process.
+As usual, jails can prevent or allow the use of this pseudo file system (via the allow.mount and allow.mount.fdescfs parameters). See jail(8) for more details.
+
+nullfs(5)
+While not specific to Linux, nullfs provides a convenient way to share directories with jailed or chroot'ed environments. To share a directory use something like this,
+    # mount_nullfs /usr/home/username /linux/vm0/home/username
+
+Now that we have a Linux environment, what should we do with it?
+
+Ping
+====
+Using the ping command within a chroot'ed Linux environment is a little on the silly side, but it served as a useful introduction to the Linuxulator.
+
+Running the Linux ping generates the amusing error message:
+   "WARNING: your kernel is veeery old. No problems." 
+and then spews a flood of
+   ping: recvmsg: Address family not supported by protocol
+
+The last message repeats for ever, making it difficult to debug. But then you remember ping has a count option which lets you do a single ping which in turn reminds you of the "one ping only" scene in that movie with Sean Connery. And now everyone at the coffee shop is staring at you because you are giggling for no apparent reason. But, sometimes, that's how these things work.
+
+The first message amuses me, probably more than it should. And because it refers to the kernel age, the obvious 'fix' is to change the reported kernel version from 2.6.32 to a more recent version like 3.10.0 via sysctl:
+
+    # sysctl compat.linux.osrelease=3.10.0
+    compat.linux.osrelease: 2.6.32 -> 3.10.0
+
+Unfortunately, this has no effect. But the unique error message enables tracking back the error to a setsockopt(..., IP_RECVERR) call failing. This socket option enables passing ICMP errors back to the application and has been available in Linux since v2.2, but it doesn't have an analogue in FreeBSD or other Unices of that lineage. When you do a web search for 'IP_RECVERR emulation' the first search result is a GitHub issue on Joyent's illumos repository [1]. While not exactly the same issue, this provided some background and a reminder that illumos had been down this road with LX Branded Zones. In fact, the illumos code base has been an invaluable resource in this journey, and I want to profusely thank them for their work and contributing it to the open source community. IP_RECVERR is also an example of a curious pattern. Namely that some applications require that system calls do not fail, but they also do not require them to actually do anything. Here, the fix was to effectively ignore the request but return a good status.
+
+Other fixes for ping included adding support for a handful of socket ioctl's, if only in a limited manner (e.g. ignore the command / request but return success). A similar approach was taken for socket options (e.g. RECVERR and ICMP_FILTER). The existing code did have a bug in the validation of the incoming sockaddr in the Linux recvmsg. There is a fix for this up for review in Phabricator.
+
+[1] https://github.com/joyent/illumos-joyent/issues/88
+
+Capabilities
+============
+Investigating the ping failures introduced the use of capabilities. Capabilities in Linux are a fine-grained mechanism to restrict the power of the superuser. The calls to set or get a capability are done in the context of the current thread or process. Each capability maps to either a specific operation or group of operations. For example,
+    CAP_MKNOD - create special files using mknod(2)
+    CAP_SETUID - make arbitrary manipulations of the process UIDs
+    CAP_NET_RAW - allow using RAW and PACKET sockets
+    CAP_NET_ADMIN - allow performing various network-related operations
+
+Each capability has three values: effective, permitted, and inheritable. The current Linuxulator, aside from a small number of trivial error cases, reports that no capabilities are set and returns an error if the application tries to set any capabilities. Amazingly, this 'works' in practice as many application follow a pattern which resembles this:
+
+	cap_get_flag(cap_cur_p, CAP_NET_ADMIN, CAP_PERMITTED, &cap_ok);
+	if (cap_ok != CAP_CLEAR)
+		cap_set_flag(cap_p, CAP_PERMITTED, 1, &cap_admin, CAP_SET);
+
+or in human, "if the capability is not set, try to set it". The Linuxulator code will indicate the capability is not set and will return an error when the application tries to set it. But many applications do not check if the 'set' operation succeeded, giving the illusion that everything is working. So how do we fix this? The list of Linux capabilities look similar to the privileges defined in FreeBSD's priv(9). The previous examples are similar to
+    PRIV_VFS_MKNOD_DEV
+    PRIV_CRED_SETUID
+    PRIV_NET_RAW
+    and then some combination of PRIV_NET_{BRIDGE|ROUTE|LAGG|...}
+
+And mapping Linux capget() to FreeBSD's priv_check() does work better for applications which do check the status of capset(). The open question with this approach is the lack of an interface to set a privilege. The priv(9) manual page even spells this out, saying:
+
+    priv -- kernel privilege checking API
+
+The intent is for some other entity like jail(2) or mac(9) to set privileges. If the Linux binary is being run inside a jail, this might make sense. But what approach should be taken when running binaries directly or within a chroot'ed environment? Is the answer to have a mac(9) module for Linux applications and use setfmac(8) to configure capabilities? Is capsicum(4) a better primitive to use? You can help here. Please, TELL ME WHAT TO DO.
+
+mremap
+======
+mremap() is a system call developed on Linux, and like Moby Dick, my quest to make it work on FreeBSD might be the death of me. So what does it do? The call can expand or shrink an existing memory mapping, potentially moving it at the same time all while preserving the contents of the original mapping. The dizziness you are now feeling is normal. It will pass in a minute. The intent of this system call was "... to implement a very efficient realloc(3)" (mremap man page).
+
+This was widely seen by other Unices as a good idea:
+
+    We don't have a native mremap() (and nor do we particularly want one)
+
+      - illumos _anon_
+
+To a problem without another solution
+
+    There are a thousand ways to do it, which is why linux's mremap() syscall is stupid.
+      * simply mmap() a larger block in the first place.
+      * mmap() the tail end of the newly extended file without removing or overwriting
+        the previous mmap,
+      * munmap() and re-mmap() the file.
+      * Don't depend on a single monolithic mmap() ..., instead mmap the
+        file in chunks on an as-needed basis.
+
+      - BSD _anon_
+
+And, in fact, illumos implements mremap() for LX Branded Zones (similar to the Linuxulator) using a combination of mmap with memcpy.
+
+All teasing aside, none of this matters as key pieces of Linux infrastructure depend on this call:
+
+    apt, yum, pkgsrc, rpm, *malloc, uclibc, binutils
+
+What is realloc()? The realloc() function changes the size of a previously allocated memory region, leaving the contents of the memory unchanged. Let's take a look at how this works. When an application allocates memory, it is allocating two related resources: physical memory pages and virtual address space. Physical memory, such as what is found in DIMMs, is the actual memory in a system. Applications access physical memory through a virtual address provided by the OS. The OS uses a combination of hardware and software to map units of physical memory, called pages, into a contiguous range of virtual addresses for the application. The goal of mremap() is to adjust the size of the virtual address range without touching the existing physical memory pages. If it is not possible to change the virtual address range, the kernel creates a new virtual address range and re-uses the physical memory from the previous mapping to avoid copying the existing data. This breaks down into three main cases. Actually, there are four cases, but the fourth can be thought of as a variant of the third case.
+
+The first case is truncation. Here, the length of the new mapping is less than the length of the previous mapping. The OS can accomplish this by reducing the "end address" of the virtual mapping and freeing any physical pages associated with the range between "new length" and "old length".
+
+The next case is extending a mapping. If there is unused virtual address space after the current mapping, the OS can increase the "end address" of the virtual mapping, leave the existing physical pages untouched, and add physical pages for the new virtual addresses as needed.
+
+But what if there isn't space? This could happen as the result of another memory allocation by the application. In this case, the OS must allocate a new virtual address range, map the existing physical pages to their new virtual addresses, add physical pages for the extension of the range, and free the previous virtual address space. In the fourth case, the user supplies the new virtual address instead of letting the OS pick, but the other steps are the same.
+
+As you can see, this can lead to an optimal realloc, but a good deal of knowledge, care, and planning need to go into this process. And at that point, the existing mmap() system call can do all of this in a more portable way. Without planning, most mremap() calls fall into the third case. And whether this is faster depends heavily on the circumstances, but it is probably faster. Probably.
+
+Let's say, hypothetically of course, you are messing with system calls that change memory regions and really have no idea what you are doing. The inevitable result, as the C programmer's out there are already mumbling, is a core dump.
+
+Core Dump
+=========
+When an operating system detects a fatal error in a process, it can save off the state of the process into a file called a core file or core dump. A programmer can use this file, in conjunction with a debugger like gdb or lldb, to determine how the program wound up here, and hopefully, fix the underlying bug. Although the most common cause is accessing memory not allocated to the process, executing an illegal instruction, generating a floating point exception, or explicitly signaling an abort can generate core dumps as well. A core dump should not be feared, but instead, celebrated as a gift.
+
+What is the state of a program? It includes the current register values, memory allocated, loaded libraries, and pending signals for each thread in the process. The register set is especially important as this contains the instruction which triggered the error, the memory location of the current stack pointer, and the memory location of the "return" stack pointer (i.e. the caller of this function). Put together, these pieces allow the debugger to to display the stack of function calls leading to this error, often referred to as a stack trace or backtrace. Note that the information in a core dump does not make sense by itself and must be interpreted in the context of the calling process.
+
+What is the structure of a core dump file? At a high level, it uses the standardized ELF file format. The ELF file header includes the operating system type (e.g. System V, Linux, FreeBSD, etc.), the instruction set architecture (e.g. x86, MIPS, ARM, etc.), and the object type. ELF specifies that an object type of 4 indicates the file is a core dump (i.e. e_type = ET_CORE;). Unfortunately, this is where the specification stops with respect to core dump structure, and it leaves the remaining details in the "implementation specific" category. Both Linux and FreeBSD package the process state in a series of Notes sections. For example, a core dump contains separate Note sections for the register contents, allocated or mapped memory regions, open file descriptors, and so on.
+
+An application running via the Linuxulator can create a core dump on a fatal error, but there is a problem. Under FreeBSD, gdb shows this:
+
+# gdb cdump cdump.core -quiet
+
+warning: A handler for the OS ABI "GNU/Linux" is not built into this configuration
+of GDB.  Attempting to continue with the default i386:x86-64 settings.
+
+The error indicates this gdb was not built for Linux binaries. So while the kernel knows how to deal with Linux binaries, other applications will not. Trying this under Linux, gdb indicates a different problem:
+
+# gdb cdump cdump.core -quiet
+Reading symbols from /home/ctuffli/dev/linux/cdump/cdump...done.
+
+warning: A handler for the OS ABI "FreeBSD ELF" is not built into this configuration
+of GDB.  Attempting to continue with the default i386:x86-64 settings.
+
+"/home/ctuffli/dev/linux/cdump/cdump.core": no core file handler recognizes format
+
+Here, gdb recognize the application's ABI, but it doesn't recognize the core file's type (i.e. FreeBSD ELF). From the operating system's point of view, this is a FreeBSD process, and thus the core dump ABI is FreeBSD. Editing the core dump's ELF header to change the OSABI from FreeBSD to Linux (technically, "System V") isn't enough. This change will stop gdb from complaining about the ABI, but the debugger still doesn't recognize it as a core dump. Given that ELF doesn't define anything other than the type, how does gdb determine this isn't a core dump? Answer: the size of the Note section for the process status. gdb's elf_x86_64_grok_prstatus() function in gdb/bfd/elf64-x86-64.c has
+
+static bfd_boolean
+elf_x86_64_grok_prstatus (bfd *abfd, Elf_Internal_Note *note)
+{
+
+  switch (note->descsz)
+    {
+      default:
+        return FALSE;
+
+      case 296:         /* sizeof(istruct elf_prstatus) on Linux/x32 */
+        ...
+        break;
+
+      case 336:         /* sizeof(istruct elf_prstatus) on Linux/x86_64 */
+        ...
+        break;
+    }
+
+  return TRUE;
+
+Thus the fix is to add a Linux specific core dump handler which writes out the process status note section using a format compatible with Linux. With this change, gdb now shows useful information. For example,
+
+# npm install
+Aborted (core dumped)
+
+# gdb node npm.core
+Program terminated with signal 6, Aborted.
+#0  0x0000000803c351f7 in __GI_raise (sig=sig@entry=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:56
+56	  return INLINE_SYSCALL (tgkill, 3, pid, selftid, sig);
+(gdb) bt
+#0  0x0000000803c351f7 in __GI_raise (sig=sig@entry=6) at ../nptl/sysdeps/unix/sysv/linux/raise.c:56
+#1  0x0000000803c36a28 in __GI_abort () at abort.c:119
+#2  0x000000000146a6a9 in read_times (statfile_fp=statfile_fp@entry=0x23254c0, numcpus=8, ci=ci@entry=0x2325700) at ../deps/uv/src/unix/linux-core.c:758
+#3  0x000000000146b63e in uv_cpu_info (cpu_infos=0x7fffffff69f0, count=0x7fffffff69e0) at ../deps/uv/src/unix/linux-core.c:603
+#4  0x000000000127292b in node::os::GetCPUInfo(v8::FunctionCallbackInfo<v8::Value> const&) ()
+#5  0x0000000000b1a473 in v8::internal::FunctionCallbackArguments::Call(void (*)(v8::FunctionCallbackInfo<v8::Value> const&)) ()
+#6  0x0000000000b9023c in v8::internal::MaybeHandle<v8::internal::Object> v8::internal::(anonymous namespace)::HandleApiCallHelper<false>(v8::internal::Isolate*, v8::internal::Handle<v8::internal::HeapObject>, v8::internal::Handle<v8::internal::HeapObject>, v8::internal::Handle<v8::internal::FunctionTemplateInfo>, v8::internal::Handle<v8::internal::Object>, v8::internal::BuiltinArguments) ()
+#7  0x0000000000b90e8f in v8::internal::Builtin_HandleApiCall(int, v8::internal::Object**, v8::internal::Isolate*) ()
+
+Here, we are using npm to install a Node.js application, but it ends in a core dump. Passing that core file to gdb shows the application terminated because of an Abort signal in the file raise.c. Using the 'backtrace' command, you can see the abort signal starts in frame #2 in a file called linux-core.c. Let's take a closer look.
+
+
+#2  0x000000000146a6a9 in read_times (statfile_fp=statfile_fp@entry=0x23254c0, numcpus=8, ci=ci@entry=0x2325700) at ../deps/uv/src/unix/linux-core.c:758
+
+# vi node/deps/uv/src/unix/linux-core.c
+
+static int read_times(FILE* statfile_fp, …) {
+...
+    if (6 != sscanf(buf + len,
+                    "%lu %lu %lu %lu %lu %lu",
+                    &user,
+                    &nice,
+                    &sys,
+                    &idle,
+                    &dummy,
+                    &irq))
+        abort();
+
+# cat /proc/stat
+cpu 42577 0 15154 4010351
+cpu0 5167 0 1763 501473
+...
+
+Here, again, is frame #2 from the core file's back trace. Opening the file linux-core.c and navigating to the function read_times, we find this call to sscanf. This C library call parses a given string, and in this case, is looking for six numbers. The return value is the number of items successfully matched and assigned to variables. If the string doesn't contain six numbers, it issues an abort which will terminate the process and create a core dump. The string contents it is parsing are from the output of the Linux procfs stat entry (i.e. /proc/stat). Breaking out to a shell, you can see each stat entry only contains four numbers. The linprocfs implementation of stat was correct for the early versions of Linux, but over time, Linux has changed the contents of this file. And updating the FreeBSD implementation to match what Linux applications expects, avoids the core dump.
+
+Where Next?
+===========
+
+What is the point of all this? Because, honestly, there are much easier ways to build Linux drivers. If nothing else, this talk adds another artifact to the web that describes the various pieces of Linux support on FreeBSD, an overview of how they work, and an example of them in use. What I find interesting is, most of the work extended existing infrastructure. And the "hard" parts were only hard due to my ignorance. So without all that many new lines of code, FreeBSD lets me get my job done and opens the possibility of better workflows. Since this was so useful to me, I wanted to see if others might be interested too. If so, the question is where to go from here. People have mentioned it would be great to have end user tools like Skype, but I wonder if it would be smarter to build on the strength of the OS as a server. It wouldn't be enough to just run Linux containers as a service. There would need to be a compelling reason to *not* take the natural path and run on Linux. But what if there was some additional tooling on top of jails, ZFS, and DTrace that made the debugging and trouble shooting containers on FreeBSD "better". I'm not sure what this might look like, but you might. And the answer isn't just in the kernel. It will involve users identifying the most important containers, UI (both text and graphical) experts to help make it easy, user space hackers to make it powerful, and yes, some kernel work to provide the nuts and bolts. So, help me figure this out.
