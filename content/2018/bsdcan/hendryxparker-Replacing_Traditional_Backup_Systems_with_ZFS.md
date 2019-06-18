@@ -12,5 +12,7 @@ Using portable management tools such as zfSnap and zxfer to manage backups acros
 We will explore how to easily keep rolling snapshots and replicate them to backup servers. Easily give the ability to rollback on a file servers to a snapshot taken within minutes instantly, but also allow long term snapshots to be kept and replicated efficiently to backup volumes. We will also cover deployment techniques to ensure that systems have the correct packages installed and configured via configuration management.
 
 zfSnap: https://www.zfsnap.org/
+
 zxfer: https://github.com/allanjude/zxfer
+
 Salt Configuration Management: https://www.saltstack.com/resources/community/
