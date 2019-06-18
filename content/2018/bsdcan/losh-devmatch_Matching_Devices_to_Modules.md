@@ -17,5 +17,7 @@ The experience with USB lead to the next generation design. Starting in FreeBSD 
 FreeBSD 12 is anticipated to ship with a smaller GENERIC kernel, with the bulk of the drivers loaded automatically through these means.
 
 devd Paper at 2003 BSD Conference: https://dl.acm.org/citation.cfm?id=1250974
+
 Regenerated graph of FreeBSD commits: https://people.freebsd.org/~imp/freebsd-cumulative.png
+
 Kernel sizes back to the dawn of Unix: https://docs.google.com/spreadsheets/d/13C77pmJFw4ZBmGJuNarBUvWBxBKWXG-jtvARxJDHiXs/edit#gid=0

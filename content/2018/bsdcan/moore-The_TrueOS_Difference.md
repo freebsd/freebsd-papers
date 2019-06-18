@@ -20,4 +20,5 @@ In particular, we will discuss some of the following changes:
 Time-permitting, we will also discuss some of the upcoming changes that are scheduled to appear in TrueOS which will further distinguish it from PC-BSD and FreeBSD.
 
 Website: https://www.trueos.org/
+
 GitHub: https://github.com/trueos
