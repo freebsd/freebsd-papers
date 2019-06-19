@@ -5,6 +5,7 @@ date: 2019-05-18
 author: Brooks Davis
 email: brooks.davis@sri.com
 slides: 20190518-bsdcan-cheriabi.pdf
+youtube: R4iTt6rYwHM
 ---
 Memory safety bugs such as buffer overflows are an ongoing source of
 security vulnerabilities. CheriABI is a new process model for FreeBSD
