@@ -6,7 +6,7 @@ author: Björn Alexander Zeeb
 email: bz@freebsd.org
 youtube: kTTXbZnHMFE
 ---
-In 1998 the KAME project started to provide an IPv6/IPsec reference implementation for *BSD. Where have we gotten to with IPv6 in FreeBSD?
+In 1998 the KAME project started to provide an IPv6/IPsec reference implementation for \*BSD. Where have we gotten to with IPv6 in FreeBSD?
 
 The idea for this talk originated by me spotting my badge from BSDCan 2009 hanging on my office wall.
 
