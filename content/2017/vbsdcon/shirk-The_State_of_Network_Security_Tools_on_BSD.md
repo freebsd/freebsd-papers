@@ -1,0 +1,13 @@
+---
+layout: slides
+title: "The State of Network Security Tools on BSD"
+date: 2017-09-09
+author: Michael Shirk
+email: mshirk@daemon-security.com
+youtube: BJYcTEfwQso
+---
+Network Security Monitoring (NSM) is the foundation of monitoring a network for potential intrusions and extrusions. Security tools like Snort, Suricata, and Bro create network logs to assist with investigating potential intrusions. There always seems to be interest on the Snort, Suricata, and Bro mailing lists for running open source security tools on BSD operating systems. The goal of this talk will be to describe the current state of open source security tools running on the various BSD operating systems, and what technology can assist with moving more security monitoring back to BSD. There will also be a discussion on log management, and what solutions are available for BSD operating systems.
+
+In the early days of BSDCan, and the DC area BSD conferences, there was great interest in the use of BSD operating systems for Network Security Monitoring (NSM). Tools such as Sguil showcased the entire process of incident response using just FreeBSD. Since the early 2000s, security companies have moved away from BSD operating systems to use Linux based sensor platforms (even Security Onion, the most popular platform for NSM runs on Ubuntu). Although there were performance gains at the time to change (for things like SMP), Linux systems have grown to be much more annoying than running Windows systems due to complexity and security vulnerabilities. In 2016, with the growing concern on the direction of the various Linux distributions, there has been interest in moving to a sensible UNIX platform for network security tools. I have been pushing for the evaluation of BSD network sensors as high performance network sensors, ideally with commodity hardware, but also with the addition of specialized network cards.
+
+The goal of this talk will be to provide an overview of the current network security tools available for the BSD operating systems, how to utilize them on each operating system, including any special tweaks for security or performance, and to advocate for their use on BSD operating systems. This talk will discuss my experience representing the BSD community at BroCon and SuriCon 2016, and other anecdotal information about the various network security tools. The talk will also cover the managing of log data, as this has been a point of contention recently with the tools that are available and open source for storing logs files.
