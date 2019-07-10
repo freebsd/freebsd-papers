@@ -1,6 +1,6 @@
 ---
 layout: video
-title: "The State of Network Security Tools on BSD"
+title: "Making gets() and its Friends more like SIGPIPE and SIGILL"
 date: 2017-09-09
 author: Paul Vixie
 email: paul@redbarn.org
