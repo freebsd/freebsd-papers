@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Making gets() and its Friends more like SIGPIPE and SIGILL"
 date: 2017-09-09
 author: Paul Vixie
