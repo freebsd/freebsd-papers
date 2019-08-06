@@ -3,6 +3,7 @@ layout: slides
 title: "BSD Systems Management with Ansible"
 date: 2017-09-09
 author: Benedict Reuschling
+email: bcr@FreeBSD.org
 youtube: nVJAsfgB7xY
 ---
 Traditionally, shell scripts have been used to apply changes to a Unix system in an automated way. As systems became more diverse (OS versions, patch-levels, etc.) and the number of systems a sysadmin to manage typically grows over time, this classic approach is showing some drawbacks. For example, how do you deploy a change across multiple machines simultaneously in a consistent way? Ansible is a system administration and automation tool to help solve these problems. It can deploy ad-hoc commands or complex scripts (called playbooks) in parallel via SSH to multiple machines. It also supports idempotency, which, in a nutshell, means that a change is applied only once, not multiple times and the system state only changes when said change has not been applied before. In shell scripts, this would require a lot of additional if-then-else checks, which increases the maintenance time and effort. With Ansible, this is already built-in and system administrators can make use of it right away.

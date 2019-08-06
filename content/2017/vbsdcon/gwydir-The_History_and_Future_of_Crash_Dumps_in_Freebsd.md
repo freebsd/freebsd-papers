@@ -3,6 +3,7 @@ layout: slides
 title: "The History and Future of Crash Dumps in FreeBSD"
 date: 2017-09-09
 author: Sam W. Gwydir
+email: sam@samgwydir.com
 youtube: iqnyFp3rhlY
 ---
 Crash dumps, also known as core dumps, have been a part of BSD since its beginnings in Research UNIX. Though 38 years have passed since doadump() came about in UNIX/32V, core dumps are still needed and utilized in much the same way they were then. However, as underlying assumptions about the ratio of swap to RAM have proven inappropriate for modern systems, several extensions have been made by those who needed core dumps on very large servers, or very small embedded systems.
