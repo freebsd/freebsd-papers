@@ -7,6 +7,7 @@ email:
 youtube: id-only
 video: link-to-.mp4
 videolink: link-to-page
+audiolink: link-to-page
 paper: pdf-filename
 ---
 <description goes here>
