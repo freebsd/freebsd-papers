@@ -1,5 +1,5 @@
 ---
-title: "EuroBSDCon - Live Stream: room3"
+title: "EuroBSDCon - Live Stream: Valemon"
 layout: paper
 date: 2019-09-17
 author: EuroBSDCon

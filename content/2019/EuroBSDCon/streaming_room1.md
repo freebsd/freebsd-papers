@@ -1,5 +1,5 @@
 ---
-title: "EuroBSDCon - Live Stream: room1"
+title: "EuroBSDCon - Live Stream: Plenary"
 layout: paper
 date: 2019-09-17
 author: EuroBSDCon
