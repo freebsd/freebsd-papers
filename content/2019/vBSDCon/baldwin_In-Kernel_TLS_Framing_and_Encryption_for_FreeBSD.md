@@ -4,6 +4,7 @@ title: "In-Kernel TLS Framing and Encryp6on for FreeBSD"
 date: 2019-09-06
 author: John Baldwin
 email: jhb@FreeBSD.org
+youtube: la-ljVavd3c
 venue: vBSDCon 2019
 ---
 The sendfile(2) system call provides an efficient, zero-copy mechanism
