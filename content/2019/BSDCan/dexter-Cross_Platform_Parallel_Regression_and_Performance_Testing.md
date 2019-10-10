@@ -1,0 +1,14 @@
+---
+layout: video
+title: "Cross Platform Parallel Regression and Performance Testing of, and with OpenZFS, FreeBSD and bhyve"
+date: 2019-05-18
+author: Michael Dexter
+email: editor@callfortesting.org
+youtube: QmNko8GrUxA
+venue: BSDCan 2019
+---
+"No OS left behind" would be an excellent mantra in the Open Source community but the reality is that there are "Tier 1" and "Tier >1" operating systems, file systems and other components throughout the Open Source ecosystem. The OpenZFS file system provides and excellent example and opportunity of a fundamental computing component that enjoys every positive aspect of Open Source, but is relegated to "non-tier-1" status on platforms that are not explicitly essential to commercial endeavors. These "not-yet-essential" platforms include NetBSD and Windows, not to mention non-Intel architectures such as ARM, PowerPC, and FreeBSD/Sparc64. This talk will explore exactly how a POSIX Unix environment and specific utilities can provide a common testing environment for OpenZFS on all supported OpenZFS platforms, including Microsoft Windows.
+
+This "parallel" testing approach dictates that all targeted platforms are tested simultaneously on identical hardware for instantaneous comparative results. Two additional dimensions arise from this approach: The testing of FreeBSD across multiple versions as far back as 5.0 and even older, plus the testing of non-OpenZFS code on each supported OpenZFS platform. FreeBSD was chosen as the laboratory host operating system for its unique ability to institutionally provide "Jail" container support for previous versions of FreeBSD, and bhyve hypervisor support for not only FreeBSD releases but non-FreeBSD operating systems.
+
+Implementation details include the use of Jail and bhyve for system containment and virtualization, and OpenSSH, Cygwin, and the "rtools" (net/bsdrcmds) utilities for remote system control. Unexpected dependencies include a global effort to rebuild FreeBSD's release history, parallel efforts to implement BSD-licensed S.M.A.R.T., Git and rsync utilities; cross-platform data generation tools, and a continuous validation of "guest" operating systems on the bhyve hypervisor. Urgency factors include the transition of non-Illumos/non-Linux OpenZFS platforms from Illumos to "ZFS on Linux" as their upstream source of truth, warranting expanded testing of parallel code bases of formerly-singular OpenZFS ports. Motivations for this talk include encounters with countless operating system and file system regressions in a commercial support environment, with a particular focus on performance "cliffs" over which acceptable performance travels to an unfortunate collision with lower, unacceptable levels.
