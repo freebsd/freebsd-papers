@@ -3,6 +3,7 @@ layout: video
 title: "Twenty Years in Jail: FreeBSD's Jails, Then and Now"
 date: 2019-05-17
 author: Michael W. Lucas
+email: mwl@mwl.io
 youtube: DShkyYlqpmw
 ---
 Based on the book "FreeBSD Mastery: Jails"
