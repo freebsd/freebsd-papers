@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Transitioning from FreeNAS to FreeBSD"
 date: 2019-09-06
 author: David Fullard
