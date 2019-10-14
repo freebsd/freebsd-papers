@@ -1,5 +1,5 @@
 ---
-layout: slides
+layout: video
 title: "By the numbers: ZFS Performance Results from Six Operating Systems and Their Derivatives"
 date: 2019-09-07
 author: Michael Dexter
