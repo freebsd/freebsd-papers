@@ -4,6 +4,7 @@ title: "ZFS for newbies"
 date: 2019-09-22
 author: Dan Langille
 email: dvl@freebsd.org
+youtube: 3oG-1U5AI9A
 ---
 Dan Langille thinks ZFS is the best thing to happen to filesystems since he stopped using floppy disks. ZFS can simplify so many things and lets you do things you could not do before. If you’re not using ZFS already, this entry-level talk will introduce you to the basics. Things we will cover include:
 
