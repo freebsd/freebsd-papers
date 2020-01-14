@@ -4,6 +4,7 @@ title: "NUMA Optimizations in the FreeBSD Network Stack"
 date: 2019-09-22
 author: Drew Gallatin
 email: gallatin@freebsd.org
+youtube: GNmeFi3C1Xg
 ---
 This presentation is about optimizations to keep network connections and their resources local to NUMA domains. These changes include:
 
