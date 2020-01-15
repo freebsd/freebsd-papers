@@ -3,6 +3,7 @@ layout: video
 title: "SSH Key Management"
 date: 2018-06-08
 author: Michael W. Lucas
+email: mwl@mwl.io
 youtube: FVT7sepck68
 ---
 SSH is arguably the most widely deployed systems administration tool. It's also arguably the least well configured. Many sysadmins already know how to disable passwords and chroot users, but when it comes to managing host and user SSH keys, we rely on manually copying files around. That's fine with three servers and two sysadmins, but not so good with three thousand servers and two hundred sysadmins.
