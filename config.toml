@@ -10,7 +10,7 @@ preserveTaxonomyNames = true
   post = "/:year/:title/"
 
 [params]
-  subtitle = "The collected works of the FreeBSD community as presented at various conferences and summits."
+  subtitle = "The collected works of the FreeBSD community as presented at various conferences and summits.  Please send pull request to https://github.com/freebsd/freebsd-papers/ ."
   themeVariant = "red"
 
 [taxonomies]
