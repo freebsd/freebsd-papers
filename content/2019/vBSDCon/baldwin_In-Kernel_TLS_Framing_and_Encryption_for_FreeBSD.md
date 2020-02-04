@@ -1,6 +1,6 @@
 ---
 layout: slides
-title: "In-Kernel TLS Framing and Encryp6on for FreeBSD"
+title: "In-Kernel TLS Framing and Encryption for FreeBSD"
 date: 2019-09-06
 author: John Baldwin
 email: jhb@FreeBSD.org
