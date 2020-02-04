@@ -3,6 +3,7 @@ layout: slides
 title: "Kernel TLS and TLS hardware offload"
 date: 2019-09-22
 author: Slava Shwartsman, Drew Gallatin
+youtube: p9fbofDUUr4
 ---
 TLS (Transport Layer Security) is a widely-deployed network protocol used for providing cryptographically proven security and authentication of TCP sessions. A kernel implementation of TLS will provide access to TLS hardware offload, ability to access unencrypted bytes of data in the kernel, and a reduction in copies to and from userspace by allowing the use of the sendfile(9) system call for TLS encrypted data.
 
