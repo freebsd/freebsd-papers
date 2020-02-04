@@ -92,13 +92,13 @@
 	{{ with .sect }}
 		{{- if .IsSection -}}
 			{{ safeHTML .Params.head }}
-			<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
+			<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 				{{- if .IsAncestor $currentNode }} parent {{ end -}}
-				{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
+				{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
 				{{- if .Params.alwaysopen }} parent {{ end -}}
 			">
 				<a href="{{.RelPermalink -}}">
-					<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
+					<i class="fa {{ if or (.IsAncestor $currentNode) (eq .File.UniqueID $currentNode.File.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
 					{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
 					{{- if $showvisitedlinks -}}
 						<i class="fa fa-check read-icon"></i>
@@ -107,19 +107,19 @@
 				{{- if ne (add (len .Pages) (len .Sections)) 0 }}
 					<ul class="range-sections">
 					{{- range .Sections }}
-						<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
+						<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 							{{- if .IsAncestor $currentNode }} parent {{ end -}}
-							{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
+							{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
 							{{- if .Params.alwaysopen }} parent {{ end -}}
 						">
 							<a href="{{ .RelPermalink }}">
-								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .UniqueID $currentNode.UniqueID) }}fa-angle-double-down{{ else }}fa-angle-double-right{{ end }}"></i>
+								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .File.UniqueID $currentNode.File.UniqueID) }}fa-angle-double-down{{ else }}fa-angle-double-right{{ end }}"></i>
 								{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{safeHTML .Params.Post }}
 								{{- if $showvisitedlinks -}}
 									<i class="fa fa-check read-icon"></i>
 								{{- end }}
 							</a>
-							{{- if or (eq .UniqueID $currentNode.UniqueID) (.IsAncestor $currentNode) -}}
+							{{- if or (eq .File.UniqueID $currentNode.File.UniqueID) (.IsAncestor $currentNode) -}}
 								{{- if ne (len .Pages) 0 -}}
 									<ul class="ancestor-range-pages">
 									{{ range .Pages -}}
@@ -144,7 +144,7 @@
 			</li>
 		{{ else }}
 			{{ if not .Params.Hidden }}
-				<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item {{ if eq .UniqueID $currentNode.UniqueID }}active{{ end }}">
+				<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item {{ if eq .File.UniqueID $currentNode.File.UniqueID }}active{{ end }}">
 					<a href="{{ .RelPermalink }}">
 						<i class="fa fa-angle-right papers-menu-item"></i>
 						{{ safeHTML .Params.Pre }} {{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
