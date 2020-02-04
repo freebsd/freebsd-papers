@@ -134,7 +134,7 @@
 						</li>
 					{{- end -}}
 					{{- range .Pages -}}
-						{{- if and .Params.hidden (not $.showhidden) -}} 
+						{{- if or (.IsSection) (and .Params.hidden (not $.showhidden)) -}}
 						{{- else -}}
 							{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
 						{{- end -}}

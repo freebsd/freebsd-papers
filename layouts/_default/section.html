@@ -12,9 +12,11 @@
 
     <ul>
     {{ range .Data.Pages }}
+        {{- if not .IsSection -}}
         <li>
             <a href="{{ .RelPermalink }}">{{ .Title }} &mdash; {{ partial "aname.html" .Params.Author }}</a>
         </li>
+        {{- end -}}
     {{ end }}
     </ul>
 
