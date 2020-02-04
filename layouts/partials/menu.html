@@ -26,7 +26,7 @@
 			<ul>
 			{{- range sort . "Weight" -}}
 				<li>
-					{{.Pre -}}<a class="padding" href="{{.URL | absLangURL -}}">{{safeHTML .Name -}}</a>{{.Post -}}
+					{{.Pre -}}<a class="padding" href="{{.RelPermalink | absLangURL -}}">{{safeHTML .Name -}}</a>{{.Post -}}
 				</li>
 			{{- end -}}
 			</ul>
@@ -92,7 +92,7 @@
 	{{ with .sect }}
 		{{- if .IsSection -}}
 			{{ safeHTML .Params.head }}
-			<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item 
+			<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 				{{- if .IsAncestor $currentNode }} parent {{ end -}}
 				{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
 				{{- if .Params.alwaysopen }} parent {{ end -}}
@@ -107,7 +107,7 @@
 				{{- if ne (add (len .Pages) (len .Sections)) 0 }}
 					<ul class="range-sections">
 					{{- range .Sections }}
-						<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item 
+						<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 							{{- if .IsAncestor $currentNode }} parent {{ end -}}
 							{{- if eq .UniqueID $currentNode.UniqueID }} active {{ end -}}
 							{{- if .Params.alwaysopen }} parent {{ end -}}
@@ -144,7 +144,7 @@
 			</li>
 		{{ else }}
 			{{ if not .Params.Hidden }}
-				<li data-nav-id="{{ .URL }}" title="{{ .Title }}" class="dd-item {{ if eq .UniqueID $currentNode.UniqueID }}active{{ end }}">
+				<li data-uniqueid="{{ .UniqueID }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item {{ if eq .UniqueID $currentNode.UniqueID }}active{{ end }}">
 					<a href="{{ .RelPermalink }}">
 						<i class="fa fa-angle-right papers-menu-item"></i>
 						{{ safeHTML .Params.Pre }} {{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
