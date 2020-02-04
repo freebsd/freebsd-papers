@@ -1,7 +1,7 @@
 ---
 layout: slides
 title: "Why I prefer thick jails over thin jails"
-date: 2019-09-22
+date: 2019-09-21
 author: Dan Langille
 email: dvl@freebsd.org
 youtube: kAJ7RzfPaLA
