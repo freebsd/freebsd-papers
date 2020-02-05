@@ -25,3 +25,8 @@ To check it locally:
 ```
 $ hugo server
 ```
+
+To check it locally when `hugo server` arbitrarily refuses to serve files with
+long names:
+```
+$ (cd public_html && python -m SimpleHTTPServer)
