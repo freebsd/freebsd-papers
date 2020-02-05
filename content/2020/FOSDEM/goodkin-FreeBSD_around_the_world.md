@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "FreeBSD Around the World!"
 date: 2020-02-02
 author: Deb Goodkin
