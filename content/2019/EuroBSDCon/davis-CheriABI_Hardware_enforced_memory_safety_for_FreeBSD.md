@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "CheriABI: Hardware enforced memory safety for FreeBSD"
 date: 2019-09-21
 author: Brooks Davis
