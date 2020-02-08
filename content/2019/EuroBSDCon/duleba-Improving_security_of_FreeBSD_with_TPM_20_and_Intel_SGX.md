@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Improving security of FreeBSD with TPM 2.0 and Intel SGX" 
 date: 2019-09-21
 author: Kornel Dulęba
