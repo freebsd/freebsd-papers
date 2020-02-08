@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Porting the Robot Operating System (ROS) to FreeBSD"
 date: 2019-09-21
 author: Trenton Schulz
