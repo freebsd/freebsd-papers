@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "FreeBSD and the absurdities of security compliance"
 date: 2019-09-22
 author: Eirik Øverby
