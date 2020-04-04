@@ -2,7 +2,7 @@
 layout: video
 title: "Jail Networking"
 date: 2016-11-11
-author: David Teske
+author: Devin Teske
 email: dteske@FreeBSD.org
 youtube: aoW7pWuhT_A
 venue: MeetBSD 2016
