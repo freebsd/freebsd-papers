@@ -6,3 +6,4 @@ author: George Neville-Neil
 email: gnn@neville-neil.com
 youtube: 9BcdRHNTdf4
 ---
+Additional Author: Jim Thompson
