@@ -1,5 +1,5 @@
 ---
-title: BSDCan 2018
+title: BSDCan
 ---
 6-9 June 2018, University of Ottawa, Ottawa, Canada.
 
