@@ -1,5 +1,5 @@
 ---
-title: BSDCan 2019
+title: BSDCan
 ---
 15-18 May 2019, University of Ottawa, Ottawa, Canada.
 
