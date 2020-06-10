@@ -1,5 +1,5 @@
 ---
-title: vBSDcon 2017
+title: vBSDcon
 ---
 7-9 September 2017, Hyatt Regency, Reston, Virginia, USA.
 
