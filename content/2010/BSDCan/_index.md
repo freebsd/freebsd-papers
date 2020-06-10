@@ -1,5 +1,5 @@
 ---
-title: BSDCan 2010
+title: BSDCan
 ---
 13-14 May 2010, University of Ottawa, Ottawa, Canada.
 
