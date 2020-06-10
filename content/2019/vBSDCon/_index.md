@@ -1,5 +1,5 @@
 ---
-title: vBSDcon 2019
+title: vBSDcon
 ---
 5-7 September 2019, Hyatt Regency, Reston, Virginia, USA.
 
