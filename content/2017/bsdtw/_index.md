@@ -1,5 +1,5 @@
 ---
-title: BSD Taiwan 2017
+title: BSD Taiwan
 ---
 11-12 November 2017, Beitou Resort, Taipei, Taiwan.
 

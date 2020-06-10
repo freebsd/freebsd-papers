@@ -1,5 +1,5 @@
 ---
-title: vBSDcon 2015
+title: vBSDcon
 ---
 11-13 September 2015, Sheraton, Reston, Virginia, USA.
 

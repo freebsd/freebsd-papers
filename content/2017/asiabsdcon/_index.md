@@ -1,5 +1,5 @@
 ---
-title: AsiaBSDcon 2017
+title: AsiaBSDcon
 ---
 9-12 March 2017, Tokyo University of Science, Tokyo, Japan.
 

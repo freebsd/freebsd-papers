@@ -1,3 +1,3 @@
 ---
-title: LISA ’08
+title: LISA
 ---
