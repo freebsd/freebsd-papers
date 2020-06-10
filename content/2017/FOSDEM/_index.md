@@ -1,5 +1,5 @@
 ---
-title: FOSDEM 2017
+title: FOSDEM
 ---
 4-5 February 2017, ULB Solbosch Campus, Brussels, Belgium.
 
