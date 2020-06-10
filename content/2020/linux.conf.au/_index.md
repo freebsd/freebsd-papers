@@ -1,5 +1,5 @@
 ---
-title: linux.conf.au 2020
+title: linux.conf.au
 ---
 12-17 January 2020, Gold Coast, Australia
 
