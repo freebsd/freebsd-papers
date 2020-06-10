@@ -1,5 +1,5 @@
 ---
-title: EuroBSDcon 2017
+title: EuroBSDcon
 ---
 21-24 September 2017, Espace Saint Martin, Paris, France.
 
