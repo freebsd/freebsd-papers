@@ -4,7 +4,7 @@ title: "Unearthing the history of Unix"
 date: 2020-06-05
 author: Warner Losh
 email:  imp@freebsd.org
-video: https://www.youtube.com/watch?v=NRq8xEvFS_g
+youtube: NRq8xEvFS_g
 ---
 We've now had 50 years of Unix under our belts. We use many different technologies in our daily life and may be dimly aware they are from Unix. Much of the early history has been lost due to the passage of time and some of the people that lived through it. Recently, new artifacts have come to life that sheds more light on the early days of Unix. These artifacts are showing a more complex and nuanced history than the typical ones told to date. This talk will explore these new finds, as well as many that are hiding in plain sight. From the early PDP-7 unix, to later innovations like networking and SMP, there are surprises at every turn.
 
