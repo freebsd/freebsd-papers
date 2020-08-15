@@ -3,6 +3,7 @@ layout: slides
 title: "A Personal FreeBSD Deployment"
 date: 2020-06-06
 author: Dhananjay Balan
+youtube: Qfgoz3SQ_hY
 ---
 Things I wish I should've known before starting a FreeBSD deployment
 
