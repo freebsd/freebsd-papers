@@ -4,6 +4,7 @@ title: "Migrating to FreeBSD from a Linux sysadmins perspective"
 date: 2020-06-05
 author: Albert Dengg
 email:  malbert@fsfe.org
+youtube: lPS6bffVQkI
 ---
 While I have been using Linux actively in one way or another (not counting embedded systems where i don't have access) for over 20 years now, i have been migrating some stuff to FreeBSD recently (Everything from a forced migration of my daily driver to a more planed migration of production servers and firewalls).
 

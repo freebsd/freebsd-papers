@@ -4,6 +4,7 @@ title: "sysctlinfo: a new interface to visit the FreeBSD sysctl MIB and to pass 
 date: 2020-06-06
 author: Alfonso S. Siciliano
 email: alfonso.siciliano@email.com
+youtube: _eAgYJ8JS9U
 ---
 The FreeBSD kernel maintains a Management Information Base (MIB) where a component (object) represents a parameter of the system. The sysctl system call explores the MIB to find an object by its Object Identifier (OID) and calls its handler to get or set the value of the parameter. It is often necessary to find an object not to call its handler but to get its info (description, type, name, next object, etc.), so the kernel provides an undocumented interface implemented in kern_sysctl.c.
 

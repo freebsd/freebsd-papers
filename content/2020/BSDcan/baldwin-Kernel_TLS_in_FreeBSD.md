@@ -3,6 +3,7 @@ layout: slides
 title: "In-kernel TLS Framing and Encryption for FreeBSD"
 date: 2020-06-05
 author: John Baldwin
+youtube: JdgOQi6lX5M
 ---
 In the past year, several changes have been committed to FreeBSD to add support for in-kernel TLS framing and encryption on TCP sockets.
 

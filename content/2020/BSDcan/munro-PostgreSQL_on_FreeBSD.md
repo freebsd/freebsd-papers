@@ -4,6 +4,7 @@ title: "PostgreSQL on FreeBSD"
 date: 2020-06-06
 author: Thomas Munro
 email: thomas.munro@microsoft.com
+youtube: fdbO5Jpopbg
 ---
 A talk about past changes and potential future changes in PostgreSQL and FreeBSD that aim to make this combination the best relational database platform.
 
