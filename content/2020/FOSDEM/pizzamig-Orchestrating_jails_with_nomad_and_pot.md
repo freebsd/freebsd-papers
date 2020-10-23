@@ -4,7 +4,7 @@ title: "Orchestrating jails with nomad and pot"
 date: 2020-02-02
 author: Luca Pizzamiglio
 email: pizzamig@FreeBSD.org
-video: x7QqxhjINcE
+youtube: x7QqxhjINcE
 ---
 ## A container-based cloud computing platform for FreeBSD
 
