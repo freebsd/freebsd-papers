@@ -4,7 +4,7 @@ title: "The hidden early history of Unix"
 date: 2020-02-01
 author: Warner Losh
 email:  imp@freebsd.org
-video: XuzeagzQwRs
+youtube: XuzeagzQwRs
 ---
 The early history of Unix is much richer than is usually presented. There are many hidden gems that are little known and quite interesting to learn about. The dates of many of the "firsts" for Unix accomplishments is much earlier than people think. This well-researched talk explores those gems, firsts and shares many artifacts from the early days of Unix. Many of these artifacts have just come to light in recent years, and change how we view the early history of Unix. Even the oldest of grey beards will learn things they didn't know about Unix from this talk.
 
