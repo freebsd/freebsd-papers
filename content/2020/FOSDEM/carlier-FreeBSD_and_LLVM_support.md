@@ -4,7 +4,7 @@ title: "FreeBSD and LLVM support"
 date: 2020-02-02
 author: David Carlier
 email: devnexen@gmail.com
-video: https://video.fosdem.org/2020/AW1.121/freebsd_llvm_support.webm
+youtube: nMIs57RWoig
 ---
 ## What is LLVM all about and how it integrates FreeBSD system
 
