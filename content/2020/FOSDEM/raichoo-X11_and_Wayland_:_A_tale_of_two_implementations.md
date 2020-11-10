@@ -4,7 +4,7 @@ title: "X11 and Wayland: A tale of two implementations"
 date: 2020-02-02
 author: Raichoo Ketchum
 email: raichoo@acmelabs.space 
-video: https://video.fosdem.org/2020/AW1.121/porting_wayland.webm
+youtube: 8E0SOWo-Gsg
 ---
 ## Implementing the hikari window manager/compositor
 
