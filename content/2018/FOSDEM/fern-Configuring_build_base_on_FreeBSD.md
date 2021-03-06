@@ -4,7 +4,7 @@ title: "Configuring build base on FreeBSD"
 date: 2018-02-03
 author: Rober fern
 email: 
-video: https://video.fosdem.org/2018/K.3.401/configuring_build_base_on_freebsd.mp4
+youtube: di79HpcMaXI
 ---
 ## Making things easy for the user
 

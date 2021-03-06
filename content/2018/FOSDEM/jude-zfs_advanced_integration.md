@@ -4,7 +4,7 @@ title: "ZFS: Advanced Integration"
 date: 2018-02-03
 author: Allan Jude
 email: allanjude@freebsd.org
-video: https://video.fosdem.org/2018/K.3.401/zfs_advanced_integration.mp4
+youtube: 1t9-w8SIcts
 ---
 ## Server, Laptop, Embedded, or Appliance -- ZFS is the Answer
 

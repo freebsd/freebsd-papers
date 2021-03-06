@@ -4,7 +4,7 @@ title: "Reflections on Teaching a Unix Class With FreeBSD"
 date: 2018-02-03
 author: Benedict Reuschling
 email: bcr@freebsd.org
-video: https://video.fosdem.org/2018/K.3.401/reflections_on_reaching_unix_class_with_freebsd.mp4
+youtube: aQI_1Fl0SpA
 ---
 ## Lessons learned on both sides
 

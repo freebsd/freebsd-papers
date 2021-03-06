@@ -4,7 +4,7 @@ title: "pot: another container framework based on jails and ZFS"
 date: 2018-02-03
 author: Luca Pizzamiglio
 email: pizzamig@freebsd.org
-video: https://video.fosdem.org/2018/K.3.401/pot_container_framework.mp4
+youtube: 8zIFhHIZDD8
 ---
 ## A personal/educational project to run containers with the power of FreeBSD
 

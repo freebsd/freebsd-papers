@@ -4,7 +4,7 @@ title: "The FreeBSD Foundation and How We Are Changing the World"
 date: 2018-02-03
 author: Deb Goodkin
 email: deb@freebsdfoundation.org
-video: https://video.fosdem.org/2018/K.3.401/the_freebsd_fundation_how_we_can_change_the_world.mp4
+youtube: 3joUxR_VD9s
 ---
 The FreeBSD Foundation was founded in 2000, initially to own the FreeBSD trademarks and intellectual property. Over the past 17 years, we’ve grown from being run by 3 volunteer board members, to a team of 9 staff members, and 8 volunteer board members. My presentation will cover a little bit of our history, what’s our purpose, the key areas we focus on and why, and how we are making this a better world, by supporting FreeBSD, the community, and the overall open source ecosystem.
 

@@ -4,7 +4,7 @@ title: "Unix Architecture Evolution from the 1970 PDP-7 to the 2018 FreeBSD"
 date: 2018-02-03
 author: Diomidis Spinellis
 email: dds@aueb.gr
-video: https://video.fosdem.org/2018/Janson/unix_evolution.mp4
+youtube: FbDebSinSQo
 ---
 ## Important Milestones and Lessons Learned
 

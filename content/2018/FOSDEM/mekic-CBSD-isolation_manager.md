@@ -4,7 +4,7 @@ title: "CBSD, Isolation manager"
 date: 2018-02-03
 author: Goran Mekić
 email: meka@tilda.center
-video: https://video.fosdem.org/2018/K.3.401/cbsd_isolation_manager.mp4
+youtube: CbIqBKRm-xQ
 ---
 ## How to manage jails, bhyve VMs and Xen via CBSD, while keeping it all simple
 
