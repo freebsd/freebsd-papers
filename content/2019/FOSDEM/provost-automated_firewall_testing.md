@@ -4,7 +4,7 @@ title: Automated Firewall Testing
 date: 2019-02-02
 author: Kristof Provost
 email: kp@FreeBSD.org
-youtube: -WzTyggngNA
+youtube: RYtwx7Jj8aE
 ---
 
 We're all convinced that automated tests are a good idea. For some applications
