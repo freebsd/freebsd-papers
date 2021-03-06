@@ -4,7 +4,7 @@ title: "CloudABI for FreeBSD"
 date: 2017-02-04
 author: Ed Schouten
 email: ed@freebsd.org
-video: https://video.fosdem.org/2017/K.3.201/cloud_abi.mp4
+youtube: nIX9I4Lwhbs
 ---
 ## How does it work?
 
