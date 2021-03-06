@@ -4,7 +4,7 @@ title: "Netflix and FreeBSD: Using Open Source to Deliver Streaming Video"
 date: 2019-02-02
 author: Jonathan Looney
 email: jtl@FreeBSD.org
-video: https://video.fosdem.org/2019/Janson/netflix_freebsd.webm
+youtube: vcyQBup-Gto
 ---
 Netflix has built a CDN to distribute streaming media through most of the world. The content caches run a lightly customized version of the FreeBSD operating system. This presentation will describe how Netflix uses FreeBSD, and the benefits to both FreeBSD and Netflix.
 

@@ -4,7 +4,7 @@ title: "KLEAK - Practical Kernel Memory Disclosure Detection"
 date: 2019-02-02
 author: Thomas Barabosch
 email: thomas.barabosch@fkie.fraunhofer.de 
-video: https://video.fosdem.org/2019/K.3.401/kleak.mp4
+youtube: 56YbLjw0nds
 ---
 Kernel memory disclosures - also known as kernel information leaks - denote the inadvertent copying of uninitialized bytes from kernel space to user space. Such disclosed memory may contain cryptographic keys, information about the kernel memory layout, or other forms of secret data. Even though kernel memory disclosures do not allow direct exploitation of a system, they lay the ground for it.
 

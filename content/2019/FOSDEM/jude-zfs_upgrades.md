@@ -4,7 +4,7 @@ title: "ZFS Powered Magic Upgrades"
 date: 2019-02-02
 author: Allan Jude
 email: allanjude@freebsd.org
-video: https://video.fosdem.org/2019/K.3.401/zfs_powered_magic_upgrades.mp4
+youtube: YcdFln0vO4U
 ---
 ## Using boot environments for atomic in-place upgrades
 

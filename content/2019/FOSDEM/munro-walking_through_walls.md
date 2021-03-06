@@ -4,7 +4,7 @@ title: "Walking through walls"
 date: 2019-02-02
 author: Thomas Munro
 email: tmunro@freebsd.org
-video: https://video.fosdem.org/2019/K.3.401/walking_through_walls.mp4
+youtube: J5WG3zpdT7U
 ---
 ## PostgreSQL ♥ FreeBSD
 

@@ -4,7 +4,7 @@ title: "FreeBSD in Audio Studio"
 date: 2019-02-02
 author: Goran Mekić
 email: meka@tilda.center
-video: https://video.fosdem.org/2019/K.3.401/freebsd_in_audio_studio.mp4
+youtube: fNALnFIfenM
 ---
 ## FreeBSD is usually not the first choice for music art, but it has quite a lot to offer
 

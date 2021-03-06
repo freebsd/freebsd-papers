@@ -4,7 +4,7 @@ title: "Rspamd integration into FreeBSD.org mail infrastructure"
 date: 2019-02-02
 author: Vsevolod Stakhov
 email: vsevolod@rspamd.com
-video: https://video.fosdem.org/2019/K.3.401/rspamd_integration_freebsd.mp4
+youtube: HTVh6n9SvBU
 ---
 After years using SpamAssassin on FreeBSD.org, we have moved towards Rspamd last year to improve spam filtering and integrate it as milter to postfix. With this step we could impressively drop spam rate and increased performance comparing to SpamAssassin.
 

@@ -4,7 +4,7 @@ title: "ELI5: ZFS Caching"
 date: 2019-02-02
 author: Allan Jude
 email: allanjude@freebsd.org
-video: https://video.fosdem.org/2019/K.1.105/zfs_caching.mp4
+youtube: 1Wo3i2gkAIk
 ---
 ## Explain Like I'm 5: How the ZFS Adaptive Replacement Cache works
 

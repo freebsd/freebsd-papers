@@ -3,7 +3,7 @@ layout: slides
 title: "Embedded FreeBSD on a five-core RISC-V processor using LLVM"
 date: 2019-02-02
 author: Jeremy Bennett
-video: https://video.fosdem.org/2019/K.3.401/testing_freebsd_risc_v5.mp4
+youtube: c6_g5KMUX-E
 ---
 In this talk we describe our experience of bringing up embedded FreeBSD for a heterogeneous 32/64-bit RISC-V system using LLVM, which was more difficult than you might expect. We look at the practical engineering steps needed to bring up an embedded operating system where many of the key components are not fully mature. The result is a reference embedded FreeBSD implementation for RISC-V, freely available to the community.
 

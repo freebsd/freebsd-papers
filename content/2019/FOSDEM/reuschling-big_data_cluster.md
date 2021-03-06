@@ -4,7 +4,7 @@ title: "Migrating a Big Data Cluster from Linux to FreeBSD"
 date: 2019-02-02
 author: Benedict Reuschling
 email: bcr@freebsd.org
-video: https://video.fosdem.org/2019/K.3.401/migrating_cluster_to_freebsd.mp4
+youtube: T_nz63mnlZU
 ---
 This talk will cover the on-going process of migrating a big data cluster from a Linux-only system to a mixed OS environment using more and more BSD. I'll cover how the cluster started, what it is used for and the current setup (hardware and software). Particular focus will be put on the migration of the fileserver that has been successfully migrated from a hardware RAID configuration using Linux to an OpenZFS-based FreeBSD setup. I'll detail how it was done, the planning, preparation, and important learnings I too away from the experience. The talk closes with an outline of what steps will follow in the future. The talk is intended for people interested in such setups, migration strategies, steps to take and pitfalls to avoid.
 
