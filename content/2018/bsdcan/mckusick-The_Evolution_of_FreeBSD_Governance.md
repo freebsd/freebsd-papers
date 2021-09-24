@@ -2,7 +2,7 @@
 layout: slides
 title: "The Evolution of FreeBSD Governance"
 date: 2018-06-09
-author: Kirk McKusick
+author: Marshall Kirk McKusick
 email: mckusick@mckusick.com
 youtube: mfOrJ8zUdM8
 ---
