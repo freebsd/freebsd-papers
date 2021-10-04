@@ -7,7 +7,7 @@ task:
     image: freebsd-13-0-release-amd64
   install_script:
     - sed -i.bak -e 's,pkg+http://pkg.FreeBSD.org/\${ABI}/quarterly,pkg+http://pkg.FreeBSD.org/\${ABI}/latest,' /etc/pkg/FreeBSD.conf
-    - pkg install -y git gohugo
+    - pkg install -y git-tiny gohugo
   script:
     - git submodule init
     - git submodule update
