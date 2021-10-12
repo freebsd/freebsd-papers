@@ -1,5 +1,6 @@
 ---
 title: BSDCan
+date: 2020-06-03
 ---
 3-6 June 2020, Streamed online
 

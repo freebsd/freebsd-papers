@@ -1,5 +1,6 @@
 ---
 title: Polish BSD User Group
+date: 2020-12-31
 ---
 Once a month at Warsaw, Poland, Europe
 
