@@ -20,4 +20,4 @@ This talk covers:
  * obstacles
  * resources that helped me to implement the whole thing
 
-[slides](https://acmelabs.space/~raichoo/fosdem/#1)
+Slides hosted by author: https://acmelabs.space/~raichoo/fosdem/#1
