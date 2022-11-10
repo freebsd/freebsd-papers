@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Data Science on FreeBSD/ARM64"
 date: 2022-06-03
 author: Maciej Czekaj

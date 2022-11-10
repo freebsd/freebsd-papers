@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Own The Stack: FreeBSD from a Vendor's Perspective"
 date: 2022-06-03
 author: Antranig Vartanian
