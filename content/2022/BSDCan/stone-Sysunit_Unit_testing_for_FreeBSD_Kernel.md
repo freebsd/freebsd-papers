@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Sysunit: Unit Testing for the FreeBSD Kernel"
 date: 2022-06-04
 author: Ryan Stone
