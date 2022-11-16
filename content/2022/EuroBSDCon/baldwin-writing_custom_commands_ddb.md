@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Writing Custom Command in FreeBSD's DDB Kernel Debugger"
 date: 2022-09-18
 author: John Baldwin
