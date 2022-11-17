@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "Isolated BSD build environments using virtual and hardware machines"
 date: 2017-09-09
 author: Michael Dexter

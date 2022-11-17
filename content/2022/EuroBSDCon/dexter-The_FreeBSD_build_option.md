@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "The FreeBSD build option, OpenZFS, bhyve, compat_linux, and jail.conf.d nexus"
 date: 2022-09-18
 author: Michael Dexter
