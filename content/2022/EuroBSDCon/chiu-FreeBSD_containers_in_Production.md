@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "FreeBSD containers in production. A NSFW guide."
 date: 2022-09-18
 author: Yan Ka Chiu
