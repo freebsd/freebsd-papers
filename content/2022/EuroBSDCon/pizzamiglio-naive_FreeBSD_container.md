@@ -1,5 +1,5 @@
 ---
-layout: video
+layout: slides
 title: "How far a naive FreeBSD container implementation can go"
 date: 2022-09-18
 author: Luca Pizzamiglio
