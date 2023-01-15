@@ -1,0 +1,10 @@
+---
+layout: paper
+title: "An Overview of Locking in the FreeBSD Kernel"
+date: 2012-04-24
+author: Marshall Kirk McKusick
+email: mckusick@mckusick.com
+paper: 195_locking.pdf
+venue: BSDCan Conference, Ottawa, Canada, May 11, 2012
+---
+The FreeBSD kernel uses seven different types of locks to ensure proper access to the resources that it manages. This talk describes the hierarchy of these locks from the low-level and simple to the high-level and full-featured. The functionality of each type of lock is described along with the problem domain for which it is intended. The talk concludes by describing the witness system within the FreeBSD kernel that tracks the usage of all the locks in the system and reports any possible deadlocks that might occur because of improper acquisition ordering of locks. 
