@@ -4,7 +4,7 @@ env:
 
 task:
   freebsd_instance:
-    image: freebsd-13-0-release-amd64
+    image: freebsd-13-2-release-amd64
   install_script:
     - sed -i.bak -e 's,pkg+http://pkg.FreeBSD.org/\${ABI}/quarterly,pkg+http://pkg.FreeBSD.org/\${ABI}/latest,' /etc/pkg/FreeBSD.conf
     - pkg install -y git-tiny gohugo
