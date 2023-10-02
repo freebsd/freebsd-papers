@@ -3,6 +3,7 @@ layout: slides
 title: "Measuring Performance Overhead of Tracing with DTrace and eBPF"
 date: 2022-09-17
 author: Mateusz Piotrowski
+youtube: fM2UGCCqL7g
 ---
 Tools such as DTrace and eBPF allow performance engineers to measure the
 performance of almost any part of an operating system. These tools can be
