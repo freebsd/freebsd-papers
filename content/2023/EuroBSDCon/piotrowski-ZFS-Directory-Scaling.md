@@ -3,6 +3,7 @@ layout: slides
 title: "ZFS Directory Scaling"
 date: 2023-09-17
 author: Mateusz Piotrowski
+youtube: RFy6VtDwQ8U
 ---
 It is not uncommon to store thousands of files in a single directory.
 Unfortunately, a growing directory size may result in unexpected bottlenecks
