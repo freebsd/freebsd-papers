@@ -94,11 +94,13 @@
 			{{ safeHTML .Params.head }}
 			<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 				{{- if .IsAncestor $currentNode }} parent {{ end -}}
-				{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
+				{{- if and .File $currentNode $currentNode.File -}}
+					{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
+				{{- end -}}
 				{{- if .Params.alwaysopen }} parent {{ end -}}
 			">
 				<a href="{{.RelPermalink -}}">
-					<i class="fa {{ if or (.IsAncestor $currentNode) (eq .File.UniqueID $currentNode.File.UniqueID) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
+					<i class="fa {{ if or (.IsAncestor $currentNode) (and (and .File $currentNode $currentNode.File) (eq .File.UniqueID $currentNode.File.UniqueID)) -}}fa-angle-double-down{{- else -}}fa-angle-double-right{{- end -}}"></i>
 					{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
 					{{- if $showvisitedlinks -}}
 						<i class="fa fa-check read-icon"></i>
@@ -109,26 +111,30 @@
 					{{- range .Sections }}
 						<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
 							{{- if .IsAncestor $currentNode }} parent {{ end -}}
-							{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
+							{{- if and .File $currentNode $currentNode.File -}}
+								{{- if eq .File.UniqueID $currentNode.File.UniqueID }} active {{ end -}}
+							{{- end -}}
 							{{- if .Params.alwaysopen }} parent {{ end -}}
 						">
 							<a href="{{ .RelPermalink }}">
-								<i class="fa {{ if or (.IsAncestor $currentNode) (eq .File.UniqueID $currentNode.File.UniqueID) }}fa-angle-double-down{{ else }}fa-angle-double-right{{ end }}"></i>
+								<i class="fa {{ if or (.IsAncestor $currentNode) (and (and .File $currentNode $currentNode.File) (eq .File.UniqueID $currentNode.File.UniqueID)) }}fa-angle-double-down{{ else }}fa-angle-double-right{{ end }}"></i>
 								{{ safeHTML .Params.Pre }}{{ or .Params.menuTitle .LinkTitle .Title }}{{safeHTML .Params.Post }}
 								{{- if $showvisitedlinks -}}
 									<i class="fa fa-check read-icon"></i>
 								{{- end }}
 							</a>
-							{{- if or (eq .File.UniqueID $currentNode.File.UniqueID) (.IsAncestor $currentNode) -}}
-								{{- if ne (len .Pages) 0 -}}
-									<ul class="ancestor-range-pages">
-									{{ range .Pages -}}
-										{{- if and .Params.hidden (not $.showhidden) -}} 
-										{{- else -}}
-											{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
-										{{- end -}}
-									{{- end }}
-									</ul>
+							{{- if and .File $currentNode $currentNode.File -}}
+								{{- if or (and (and .File $currentNode $currentNode.File) (eq .File.UniqueID $currentNode.File.UniqueID)) (.IsAncestor $currentNode) -}}
+									{{- if ne (len .Pages) 0 -}}
+										<ul class="ancestor-range-pages">
+										{{ range .Pages -}}
+											{{- if and .Params.hidden (not $.showhidden) -}}
+											{{- else -}}
+												{{ template "papers-tree-nav" dict "sect" . "currentnode" $currentNode "showvisitedlinks" $showvisitedlinks }}
+											{{- end -}}
+										{{- end }}
+										</ul>
+									{{- end -}}
 								{{- end -}}
 							{{- end }}
 						</li>
@@ -144,7 +150,11 @@
 			</li>
 		{{ else }}
 			{{ if not .Params.Hidden }}
-				<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item {{ if eq .File.UniqueID $currentNode.File.UniqueID }}active{{ end }}">
+				<li data-uniqueid="{{ with .File }}{{ .UniqueID }}{{ end }}" data-nav-id="{{ .RelPermalink }}" title="{{ .Title }}" class="dd-item
+					{{- if and .File $currentNode $currentNode.File -}}
+						{{ if eq .File.UniqueID $currentNode.File.UniqueID }}active{{ end }}
+					{{- end -}}
+				">
 					<a href="{{ .RelPermalink }}">
 						<i class="fa fa-angle-right papers-menu-item"></i>
 						{{ safeHTML .Params.Pre }} {{ or .Params.menuTitle .LinkTitle .Title }}{{ safeHTML .Params.Post }}
