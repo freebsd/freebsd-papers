@@ -3,7 +3,9 @@ layout: slides
 title: "Refining FreeBSD's Kernel Crypto Framework"
 date: 2022-06-04
 author: John Baldwin
+email: jhb@FreeBSD.org
 youtube: OxnrUwtVZ0U
+venue: BSDCan 2022
 ---
 FreeBSD imported a modified version of the OpenCrypto Framework from OpenBSD nearly 20 years ago. At the time the primary use case was IPsec. Since then, new use cases have arisen including disk encryption and kernel-assisted TLS.
 

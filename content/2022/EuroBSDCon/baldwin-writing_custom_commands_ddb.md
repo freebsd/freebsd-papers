@@ -3,7 +3,9 @@ layout: slides
 title: "Writing Custom Command in FreeBSD's DDB Kernel Debugger"
 date: 2022-09-18
 author: John Baldwin
+email: jhb@FreeBSD.org
 youtube: sZMcVZjFW4g
+venue: EuroBSDCon 2022
 ---
 FreeBSD's kernel includes an in-kernel debugger (DDB) inherited from 4BSD.
 DDB's command interface provides limited capabilities for examining data, but
