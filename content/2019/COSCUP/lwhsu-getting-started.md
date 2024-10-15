@@ -1,7 +1,7 @@
 ---
 layout: slides
 title: "Getting started with FreeBSD development"
-date: 2019-08-18 15:30 ~ 16:00
+date: 2019-08-18
 author: Li-Wen Hsu
 email: lwhsu@FreeBSD.org
 ---

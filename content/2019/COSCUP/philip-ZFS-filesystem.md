@@ -1,7 +1,7 @@
 ---
 layout: slides
 title: "The ZFS filesystem"
-date: 2019-10-15 10:50 ~ 11:35
+date: 2019-10-15
 author: Philip Paeps
 email: philip@freebsd.org
 ---

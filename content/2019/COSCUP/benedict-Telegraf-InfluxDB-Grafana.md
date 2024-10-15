@@ -1,7 +1,7 @@
 ---
 layout: slides
 title: "Monitor your Systems with Telegraf, InfluxDB, and Grafana-A FreeBSD-focused Howto"
-date: 2019-08-18 14:00 ~ 14:40
+date: 2019-08-18
 author: Benedict Reuschling
 email: bcr@FreeBSD.org
 ---
