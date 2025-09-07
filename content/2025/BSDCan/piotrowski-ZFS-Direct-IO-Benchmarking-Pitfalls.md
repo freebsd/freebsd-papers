@@ -3,6 +3,7 @@ layout: slides
 title: "ZFS Direct IO Benchmarking Pitfalls"
 date: 2025-06-13
 author: Mateusz Piotrowski
+youtube: tYCN8Yg-0JQ
 ---
 
 Not too long ago, support for direct IO landed in OpenZFS after years of
