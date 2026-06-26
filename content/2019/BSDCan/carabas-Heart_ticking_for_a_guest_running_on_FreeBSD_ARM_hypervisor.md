@@ -7,7 +7,7 @@ email: mihai@freebsd.org
 youtube: OGMBwnx6J-Y
 venue: BSDCan 2019
 ---
-Interrupts are used in modern systems to signal events that require immediate action. Current CPUs implement interrupts using some type of controller circuit. As such, the ARM architecture uses a system called Generic Interrupt Controller to manage interrupts. In order for virtualization to be possible on ARM hardware, a Virtual Generic Interrupt Controller needs to be present to manage interrupts for guest operating systems. This research project describes implementing such a system for an ARMv7 processor running the FreeBSD hypervisor - bhyve. Also to have a fully reponsive guest, we present the timer virtualization implementation.
+Interrupts are used in modern systems to signal events that require immediate action. Current CPUs implement interrupts using some type of controller circuit. As such, the ARM architecture uses a system called Generic Interrupt Controller to manage interrupts. In order for virtualization to be possible on ARM hardware, a Virtual Generic Interrupt Controller needs to be present to manage interrupts for guest operating systems. This research project describes implementing such a system for an ARMv7 processor running the FreeBSD hypervisor - bhyve. Also to have a fully responsive guest, we present the timer virtualization implementation.
 
 In the past, handling of external events - such as keyboard input - was done by polling the respective device in order to check whether any processing was required. This method was inefficient due to the difficulty of balancing the promptness of responding to an event versus the time spent in polling. Furthermore, the method did not scale well with the number of sources of possible events.
 

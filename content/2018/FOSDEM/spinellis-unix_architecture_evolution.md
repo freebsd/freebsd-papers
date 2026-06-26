@@ -21,5 +21,5 @@ How did the architecture of Unix evolve over the past half century? Based on a G
 [Evolution of Unix facilities dataset](https://dspinellis.github.io/unix-history-man/index.html)
 [The Unix History Repository](https://github.com/dspinellis/unix-history-repo)
 [A visualization of Unix evolution](https://youtu.be/S7JB0mhrGCQ)
-[Reconstrution of the Third Edition Manual (nroff)](https://github.com/dspinellis/unix-v3man)
-[Reconstrution of the Fourth Edition Manual (troff)](https://github.com/dspinellis/unix-v4man)
+[Reconstruction of the Third Edition Manual (nroff)](https://github.com/dspinellis/unix-v3man)
+[Reconstruction of the Fourth Edition Manual (troff)](https://github.com/dspinellis/unix-v4man)

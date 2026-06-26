@@ -1,6 +1,6 @@
 ---
 layout: slides
-title: "Master & Minions or the Dream of BSD Automation: Using Salt and Python to manage the a BSD Cloud"
+title: "Master & Minions or the Dream of BSD Automation: Using Salt and Python to manage a BSD Cloud"
 date: 2019-05-17
 author: Calvin Hendryx-Parker
 email: calvin@sixfeetup.com

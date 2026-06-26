@@ -9,7 +9,7 @@ Nowadays, servers have become more and more used, whether we talk about providin
 
 Even though necessary, bhyve does not have a migration feature implemented. In this presentation, I will present some migration features for bhyve based on a state save and restore mechanism for bhyve.
 
-Virtual machine migration is a powerful tool when talking about server maintenance. Well known hypervisors, such as Xen, kvm and VMWare, have migration mechanism for moving a virtual machine from a host to another. However, bhyve, FreeBSD's hypervisor does not, even if this feature's importance seems to be growing each day.
+Virtual machine migration is a powerful tool when talking about server maintenance. Well known hypervisors, such as Xen, kvm and VMWare, have migration mechanisms for moving a virtual machine from a host to another. However, bhyve, FreeBSD's hypervisor does not, even if this feature's importance seems to be growing each day.
 
 In the following presentation, we will show three ways of migrating a guest where subsequent types will provide lower downtime. These three migration algorithms are still under development in a project started at University Politehnica of Bucharest and are implemented using a state save and restore mechanism that is under development at the same university.
 
